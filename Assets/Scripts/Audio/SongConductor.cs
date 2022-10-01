@@ -93,7 +93,10 @@ namespace LD51 {
                     GameObject go = GameObject.Instantiate(note);
 
                     go.GetComponent<Note>().noteBeat = Mathf.FloorToInt(beatToCalc);
-                    go.transform.position = new Vector3(spawn.transform.position.x, 0.5f, spawn.transform.position.z);
+                    go.GetComponent<Note>().goalPos = spawn.transform.position;
+                    //go.transform.position = new Vector3(spawn.transform.position.x, 0.5f, spawn.transform.position.z);
+                    go.transform.position = spawn.transform.position - spawn.transform.up * 5;
+                    go.transform.rotation = spawn.transform.rotation;
                     go.SetActive(true);
                     prevSongPosInBeatsTruncated = beatToCalc;
 

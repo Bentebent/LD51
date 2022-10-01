@@ -89,8 +89,8 @@ namespace LD51 {
                 UpdateRotation();
 
             } else if (state == PlayerState.Dancing) {
-                _beatContainer.transform.position = transform.position + _beatContainerOffset;
-                _beatContainer.transform.LookAt(Camera.main.transform);
+                //_beatContainer.transform.position = transform.position + _beatContainerOffset;
+                //_beatContainer.transform.LookAt(Camera.main.transform);
 
                 if (Input.GetKeyDown(KeyCode.Space)) {
                     ToggleState();
@@ -108,7 +108,7 @@ namespace LD51 {
                 if (PlaceBuilding(selectedTower)) {
                     state = PlayerState.Dancing;
                     SongConductor.Instance.GetBeatBoxes();
-                    _beatContainer.transform.LookAt(Camera.main.transform);
+                    //_beatContainer.transform.LookAt(Camera.main.transform);
                 }
             } else {
                 state = PlayerState.Moving;
