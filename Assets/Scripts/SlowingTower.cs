@@ -23,6 +23,8 @@ namespace LD51 {
             other.GetComponent<PathingUnit>().speedMultiplier = 1.0f;
             base.OnTriggerExit(other);
         }
+
+
     }
 
 }

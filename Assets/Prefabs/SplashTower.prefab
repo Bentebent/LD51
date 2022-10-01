@@ -7,6 +7,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4751551033482724149, guid: e3a9279b73d6e5a4b86566064cefd463, type: 3}
+      propertyPath: m_Radius
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -4751551033482724149, guid: e3a9279b73d6e5a4b86566064cefd463, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1472230210013602680, guid: e3a9279b73d6e5a4b86566064cefd463, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -83,3 +91,4 @@ MonoBehaviour:
   state: 0
   buildArea: {fileID: 0}
   areaOfEffect: {fileID: 0}
+  explosionPrefab: {fileID: 1296834671334184885, guid: 1149bab622dba1f4fb55cd9ee32fe311, type: 3}
