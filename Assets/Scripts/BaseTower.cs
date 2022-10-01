@@ -13,6 +13,13 @@ namespace LD51 {
         public float buildValue = 0;
 
         public TowerState state = TowerState.Building;
+        public BoxCollider buildArea = null;
+        public SphereCollider areaOfEffect = null;
+
+        private void Awake() {
+            buildArea = GetComponent<BoxCollider>();
+            areaOfEffect = GetComponent<SphereCollider>();
+        }
 
         private void Start() {
 

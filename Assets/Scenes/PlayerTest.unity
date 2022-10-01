@@ -2060,5 +2060,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2040623407705692303, guid: 9abdd614f4205e748a34364b72df3820, type: 3}
+      propertyPath: towerContainers.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2040623407705692303, guid: 9abdd614f4205e748a34364b72df3820, type: 3}
+      propertyPath: towerContainers.Array.data[0].prefab
+      value: 
+      objectReference: {fileID: 1679110720307734343, guid: 531e94d286a32404aa7c19e0708930c8, type: 3}
+    - target: {fileID: 2040623407705692303, guid: 9abdd614f4205e748a34364b72df3820, type: 3}
+      propertyPath: towerContainers.Array.data[1].prefab
+      value: 
+      objectReference: {fileID: 3851510279564730346, guid: e93101e2496c5dd4784ec894151ffc44, type: 3}
+    - target: {fileID: 2040623407705692303, guid: 9abdd614f4205e748a34364b72df3820, type: 3}
+      propertyPath: towerContainers.Array.data[2].prefab
+      value: 
+      objectReference: {fileID: 8031239295847480468, guid: 32ae36ae96c9d584586a9727419fd757, type: 3}
+    - target: {fileID: 2040623407705692303, guid: 9abdd614f4205e748a34364b72df3820, type: 3}
+      propertyPath: towerContainers.Array.data[3].prefab
+      value: 
+      objectReference: {fileID: 391558201869720201, guid: 1bbd246a240735f479a2afc862b2764c, type: 3}
+    - target: {fileID: 2040623407705692303, guid: 9abdd614f4205e748a34364b72df3820, type: 3}
+      propertyPath: towerContainers.Array.data[0].keyCode
+      value: 99
+      objectReference: {fileID: 0}
+    - target: {fileID: 2040623407705692303, guid: 9abdd614f4205e748a34364b72df3820, type: 3}
+      propertyPath: towerContainers.Array.data[1].keyCode
+      value: 118
+      objectReference: {fileID: 0}
+    - target: {fileID: 2040623407705692303, guid: 9abdd614f4205e748a34364b72df3820, type: 3}
+      propertyPath: towerContainers.Array.data[2].keyCode
+      value: 98
+      objectReference: {fileID: 0}
+    - target: {fileID: 2040623407705692303, guid: 9abdd614f4205e748a34364b72df3820, type: 3}
+      propertyPath: towerContainers.Array.data[3].keyCode
+      value: 110
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9abdd614f4205e748a34364b72df3820, type: 3}

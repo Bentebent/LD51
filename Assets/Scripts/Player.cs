@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,12 @@ namespace LD51 {
     public enum PlayerState {
         Moving,
         Dancing
+    }
+
+    [Serializable]
+    public class TowerContainer {
+        public KeyCode keyCode;
+        public GameObject prefab;
     }
 
     public class Player : MonoBehaviour {
@@ -43,6 +50,7 @@ namespace LD51 {
         public float score = 0;
         public int hitsInARow = 0;
 
+        public List<TowerContainer> towerContainers = new List<TowerContainer>();
 
         private void Awake() {
             _characterController = GetComponent<CharacterController>();
@@ -58,11 +66,17 @@ namespace LD51 {
         // Update is called once per frame
         private void Update() {
 
-            if (Input.GetKeyDown(KeyCode.Space)) {
-                ToggleState();
-            }
+           
 
             if (state == PlayerState.Moving) {
+
+                foreach (TowerContainer tc in towerContainers) {
+                    if (Input.GetKeyDown(tc.keyCode)) {
+                        selectedTower = tc.prefab;
+                        ToggleState();
+                    }
+                }
+
                 GatherInput();
                 _movementVector = Vector3.zero;
                 _targetRotationVector = Vector3.zero;
@@ -73,9 +87,14 @@ namespace LD51 {
 
                 UpdateMovement();
                 UpdateRotation();
+
             } else if (state == PlayerState.Dancing) {
                 _beatContainer.transform.position = transform.position + _beatContainerOffset;
                 _beatContainer.transform.LookAt(Camera.main.transform);
+
+                if (Input.GetKeyDown(KeyCode.Space)) {
+                    ToggleState();
+                }
             }
         }
 
@@ -86,13 +105,19 @@ namespace LD51 {
             _beatContainer.SetActive(!_beatContainer.activeInHierarchy);
 
             if (state == PlayerState.Moving) {
-                if (PlaceBuilding()) {
+                if (PlaceBuilding(selectedTower)) {
                     state = PlayerState.Dancing;
                     SongConductor.Instance.GetBeatBoxes();
                     _beatContainer.transform.LookAt(Camera.main.transform);
                 }
             } else {
                 state = PlayerState.Moving;
+
+                if (towerInProgress != null && towerInProgress.state == TowerState.Building) {
+                    Destroy(towerInProgress.gameObject);
+                }
+
+                towerInProgress = null;
             }
         }
 
@@ -158,11 +183,11 @@ namespace LD51 {
             hitsInARow = 0;
             currentMultiplier = 1;
         }
-        private bool PlaceBuilding() {
+        private bool PlaceBuilding(GameObject prefab) {
             //Check if we are overlapping with any existing building
             //Else place down selected building and start dancing
 
-            towerInProgress = GameObject.Instantiate(selectedTower, transform.position, Quaternion.identity).GetComponent<BaseTower>();
+            towerInProgress = GameObject.Instantiate(prefab, transform.position, Quaternion.identity).GetComponent<BaseTower>();
 
             return true;
         }
