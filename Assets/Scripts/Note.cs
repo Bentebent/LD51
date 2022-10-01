@@ -11,10 +11,10 @@ namespace LD51 {
         private Vector3 _startPos = Vector3.zero;
         // Start is called before the first frame update
 
-        private int[] _startPositionsX = { -5, 0, 5 };
+        private float[] _startPositionsX = { -5, -2.5f, 2.5f, 5 };
 
         void Start() {
-            _startPos = new Vector3(_startPositionsX[Random.Range(0, 3)], -10.0f, 0.0f);
+            _startPos = new Vector3(_startPositionsX[Random.Range(0, 4)], -10.0f, 0.0f);
             transform.position = _startPos;
         }
 
