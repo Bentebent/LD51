@@ -11,11 +11,11 @@ namespace LD51 {
         private Vector3 _startPos = Vector3.zero;
         // Start is called before the first frame update
 
-        private float[] _startPositionsX = { -5, -2.5f, 2.5f, 5 };
-
         void Start() {
-            _startPos = SongConductor.Instance.GetNoteSpawnPosition(); //new Vector3(_startPositionsX[Random.Range(0, 4)], -10.0f, 0.0f);
-            transform.position = _startPos;
+            _startPos = transform.position;
+            transform.LookAt(Camera.main.transform);
+
+            this.name = noteBeat.ToString();
         }
 
         // Update is called once per frame
@@ -26,7 +26,7 @@ namespace LD51 {
 
                 transform.position = Vector3.Lerp(
                     new Vector3(_startPos.x, goalHeight, _startPos.z),
-                    new Vector3(_startPos.x, destroyHeight, 0),
+                    new Vector3(_startPos.x, destroyHeight, _startPos.z),
                     (SongConductor.Instance.beatsShownInAdvance - (noteBeat + SongConductor.Instance.beatsShownInAdvance - SongConductor.Instance.songPositionInBeats)) / SongConductor.Instance.beatsShownInAdvance
                 );
 

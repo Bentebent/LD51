@@ -7,6 +7,10 @@ namespace LD51 {
 
         public KeyCode keyCode;
 
+        private GameObject _noteInside = null;
+
+        public GameObject notePrefab = null;
+
         // Start is called before the first frame update
         void Start() {
 
@@ -14,17 +18,21 @@ namespace LD51 {
 
         // Update is called once per frame
         void Update() {
-
+            if (_noteInside && Input.GetKeyDown(keyCode)) {
+                Destroy(_noteInside);
+                _noteInside = null;
+            }
         }
 
         private void OnTriggerEnter(Collider other) {
-            Debug.Log("Ayy lmao");
+            _noteInside = other.gameObject;
+        }
+
+        private void OnTriggerExit(Collider other) {
+            _noteInside = null;
         }
 
         private void OnTriggerStay(Collider other) {
-            if (Input.GetKey(keyCode)) {
-                Destroy(other.transform.parent.gameObject);
-            }
         }
     }
 }

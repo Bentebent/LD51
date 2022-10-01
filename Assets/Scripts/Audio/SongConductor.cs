@@ -37,7 +37,7 @@ namespace LD51 {
         //Conductor instance
         public static SongConductor Instance => _instance;
 
-        public static List<Vector3> spawnPositions = new List<Vector3>();
+        public static List<GameObject> spawnBeat = new List<GameObject>();
 
         void Awake() {
             if (_instance == null) {
@@ -45,12 +45,6 @@ namespace LD51 {
             } else {
                 Destroy(gameObject);
                 Debug.LogWarning("A duplicate SongConductor was found");
-            }
-
-            GameObject[] beatBoxes = GameObject.FindGameObjectsWithTag("BeatBox");
-
-            foreach (GameObject beatBox in beatBoxes) {
-                spawnPositions.Add(new Vector3(beatBox.transform.position.x, -1.0f, beatBox.transform.position.z));
             }
         }
 
@@ -75,24 +69,31 @@ namespace LD51 {
             //determine how many beats since the song started
             songPositionInBeats = songPosition / secPerBeat;
 
-            int beatToCalc = Mathf.FloorToInt(songPositionInBeats) + beatsShownInAdvance;
-            if (beatToCalc - prevSongPosInBeatsTruncated > 0) {
+            Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 
-                GameObject note = GetNextNote(beatToCalc);
+            if (player.state == PlayerState.Dancing) {
+                int beatToCalc = Mathf.FloorToInt(songPositionInBeats) + beatsShownInAdvance;
+                if (beatToCalc - prevSongPosInBeatsTruncated > 0) {
 
-                GameObject go = GameObject.Instantiate(note);
-                go.GetComponent<Note>().noteBeat = Mathf.FloorToInt(beatToCalc);
-                go.SetActive(true);
-                prevSongPosInBeatsTruncated = beatToCalc;
+                    GameObject spawn = GetNextNote(beatToCalc);
+                    GameObject note = spawn.GetComponent<BeatBox>().notePrefab;
+                    GameObject go = GameObject.Instantiate(note);
+
+                    go.GetComponent<Note>().noteBeat = Mathf.FloorToInt(beatToCalc);
+                    go.transform.position = new Vector3(spawn.transform.position.x, 0.5f, spawn.transform.position.z);
+                    go.SetActive(true);
+                    prevSongPosInBeatsTruncated = beatToCalc;
+                }
             }
         }
 
         private GameObject GetNextNote(int truncatedBeatPos) {
-            return notePrefab;
+            return spawnBeat[Random.Range(0, spawnBeat.Count)];
         }
 
-        public Vector3 GetNoteSpawnPosition() {
-            return spawnPositions[Random.Range(0, spawnPositions.Count)];
+        public void GetBeatBoxes() {
+            spawnBeat.Clear();
+            spawnBeat.AddRange(GameObject.FindGameObjectsWithTag("BeatBox"));
         }
     }
 

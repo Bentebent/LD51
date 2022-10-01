@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace LD51 {
+
+    public enum PlayerState {
+        Moving,
+        Dancing
+    }
+
     public class Player : MonoBehaviour {
 
         private CharacterController _characterController = null;
@@ -16,6 +22,14 @@ namespace LD51 {
         [SerializeField]
         private float _deceleration = 0.0f;
 
+        [SerializeField]
+        private GameObject _beatContainer = null;
+
+        [SerializeField]
+        private Vector3 _beatContainerOffset = Vector3.zero;
+
+        public PlayerState state = PlayerState.Moving;
+
         private Vector3 _inputVector = Vector3.zero;
         private Vector3 _lastInputVector = Vector3.zero;
         private Vector3 _movementVector = Vector3.zero;
@@ -24,6 +38,8 @@ namespace LD51 {
 
         private void Awake() {
             _characterController = GetComponent<CharacterController>();
+
+            _beatContainer.SetActive(false);
         }
 
         // Start is called before the first frame update
@@ -33,16 +49,44 @@ namespace LD51 {
 
         // Update is called once per frame
         private void Update() {
-            GatherInput();
-            _movementVector = Vector3.zero;
-            _targetRotationVector = Vector3.zero;
 
-            Vector3 cameraInputVector = Quaternion.Euler(0f, Camera.main.transform.rotation.eulerAngles.y, 0f) * _inputVector.normalized;
-            _movementVector = cameraInputVector * _maxVelocity;
-            _targetRotationVector = cameraInputVector;
+            if (Input.GetKeyDown(KeyCode.Space)) {
+                ToggleState();
+            }
 
-            UpdateMovement();
-            UpdateRotation();
+            if (state == PlayerState.Moving) {
+                GatherInput();
+                _movementVector = Vector3.zero;
+                _targetRotationVector = Vector3.zero;
+
+                Vector3 cameraInputVector = Quaternion.Euler(0f, Camera.main.transform.rotation.eulerAngles.y, 0f) * _inputVector.normalized;
+                _movementVector = cameraInputVector * _maxVelocity;
+                _targetRotationVector = cameraInputVector;
+
+                UpdateMovement();
+                UpdateRotation();
+            }
+            else if (state == PlayerState.Dancing) {                   
+                _beatContainer.transform.position = transform.position + _beatContainerOffset;
+                _beatContainer.transform.LookAt(Camera.main.transform);
+            }
+        }
+
+        private void LateUpdate() {
+        }
+
+        public void ToggleState() {
+            _beatContainer.SetActive(!_beatContainer.activeInHierarchy);
+
+            if (state == PlayerState.Moving) {
+                state = PlayerState.Dancing;
+                SongConductor.Instance.GetBeatBoxes();
+                _beatContainer.transform.LookAt(Camera.main.transform);
+            }
+                
+            else {
+                state = PlayerState.Moving;
+            }
         }
 
         private void GatherInput() {
