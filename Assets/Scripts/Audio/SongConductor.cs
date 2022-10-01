@@ -39,6 +39,10 @@ namespace LD51 {
 
         public static List<GameObject> spawnBeat = new List<GameObject>();
 
+        private List<GameObject> _inProgressNotes = new List<GameObject>();
+
+        private float _waitTimer = 0.0f;
+
         void Awake() {
             if (_instance == null) {
                 _instance = this;
@@ -72,6 +76,15 @@ namespace LD51 {
             Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 
             if (player.state == PlayerState.Dancing) {
+
+                if (_waitTimer == 0.0f) {
+                    _waitTimer = Time.time;
+                    return;
+                }
+
+                if (Time.time - _waitTimer < 1.0f)
+                    return;
+
                 int beatToCalc = Mathf.FloorToInt(songPositionInBeats) + beatsShownInAdvance;
                 if (beatToCalc - prevSongPosInBeatsTruncated > 0) {
 
@@ -83,7 +96,21 @@ namespace LD51 {
                     go.transform.position = new Vector3(spawn.transform.position.x, 0.5f, spawn.transform.position.z);
                     go.SetActive(true);
                     prevSongPosInBeatsTruncated = beatToCalc;
+
+                    _inProgressNotes.Add(go);
                 }
+            } else {
+                if (_inProgressNotes.Count > 0) {
+                    foreach (GameObject go in _inProgressNotes) {
+                        if (go != null) {
+                            Destroy(go);
+                        }
+                    }
+
+                    _inProgressNotes.Clear();
+                }
+
+                _waitTimer = 0.0f;
             }
         }
 
