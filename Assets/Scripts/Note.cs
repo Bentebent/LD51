@@ -14,7 +14,7 @@ namespace LD51 {
         private float[] _startPositionsX = { -5, -2.5f, 2.5f, 5 };
 
         void Start() {
-            _startPos = new Vector3(_startPositionsX[Random.Range(0, 4)], -10.0f, 0.0f);
+            _startPos = SongConductor.Instance.GetNoteSpawnPosition(); //new Vector3(_startPositionsX[Random.Range(0, 4)], -10.0f, 0.0f);
             transform.position = _startPos;
         }
 
@@ -36,7 +36,7 @@ namespace LD51 {
             } else {
                 transform.position = Vector3.Lerp(
                     _startPos,
-                    new Vector3(_startPos.x, goalHeight, 0),
+                    new Vector3(_startPos.x, goalHeight, _startPos.z),
                     (SongConductor.Instance.beatsShownInAdvance - (noteBeat - SongConductor.Instance.songPositionInBeats)) / SongConductor.Instance.beatsShownInAdvance
                 );
             }

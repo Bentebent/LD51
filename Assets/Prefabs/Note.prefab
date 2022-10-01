@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1600724638407489443}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 2778821346083267322}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7492023136545485154}
@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5216759548682448852}
   - component: {fileID: 7012213094464250851}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Physics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 7492023136545485154}
   - component: {fileID: 6362673350043743356}
   - component: {fileID: 6701235883698749012}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Placeholder_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -170,9 +170,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3052375835955429866}
   - component: {fileID: -2965758183039863804}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Note
-  m_TagString: Untagged
+  m_TagString: Note
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -207,5 +207,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   noteBeat: 0
-  goalHeight: 0
-  destroyHeight: 10
+  goalHeight: 2.5
+  destroyHeight: 5

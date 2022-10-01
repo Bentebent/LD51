@@ -37,12 +37,20 @@ namespace LD51 {
         //Conductor instance
         public static SongConductor Instance => _instance;
 
+        public static List<Vector3> spawnPositions = new List<Vector3>();
+
         void Awake() {
             if (_instance == null) {
                 _instance = this;
             } else {
                 Destroy(gameObject);
                 Debug.LogWarning("A duplicate SongConductor was found");
+            }
+
+            GameObject[] beatBoxes = GameObject.FindGameObjectsWithTag("BeatBox");
+
+            foreach (GameObject beatBox in beatBoxes) {
+                spawnPositions.Add(new Vector3(beatBox.transform.position.x, -1.0f, beatBox.transform.position.z));
             }
         }
 
@@ -81,6 +89,10 @@ namespace LD51 {
 
         private GameObject GetNextNote(int truncatedBeatPos) {
             return notePrefab;
+        }
+
+        public Vector3 GetNoteSpawnPosition() {
+            return spawnPositions[Random.Range(0, spawnPositions.Count)];
         }
     }
 
