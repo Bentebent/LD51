@@ -16,6 +16,8 @@ namespace LD51 {
         public BoxCollider buildArea = null;
         public SphereCollider areaOfEffect = null;
 
+        protected Dictionary<int, PathingUnit> targets = new Dictionary<int, PathingUnit>();
+
         private void Awake() {
             buildArea = GetComponent<BoxCollider>();
             areaOfEffect = GetComponent<SphereCollider>();
@@ -25,19 +27,28 @@ namespace LD51 {
 
         }
 
-        private void Update() {
+        protected virtual void Update() {
+            List<int> removeIds = new List<int>();
+            foreach(var kvp in targets) {
+                if (kvp.Value == null) {
+                    removeIds.Add(kvp.Key);
+                }
+            }
 
+            removeIds.ForEach(x => targets.Remove(x));
         }
 
-        protected void OnTriggerEnter(Collider other) {
-            Player player = other.GetComponent<Player>();
-            if (player != null) { 
+        protected virtual void OnTriggerEnter(Collider other) {
+            if (other.gameObject.layer == Layers.Enemy) {
+                if (!targets.ContainsKey(other.GetInstanceID())) {
+                    targets.Add(other.GetInstanceID(), other.GetComponent<PathingUnit>());
+                }
             }
         }
 
-        protected void OnTriggerExit(Collider other) {
-            Player player = other.GetComponent<Player>();
-            if (player != null) {
+        protected virtual void OnTriggerExit(Collider other) {
+            if (other.gameObject.layer == Layers.Enemy) {
+                targets.Remove(other.GetInstanceID());
             }
         }
 

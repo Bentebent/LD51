@@ -37,7 +37,10 @@ namespace LD51 {
             }
 
             public void DrawGizmos() {
+                Color oldColor = Gizmos.color;
+                Gizmos.color = Color.red;
                 Gizmos.DrawLine(start, end);
+                Gizmos.color = oldColor;
             }
         }
 
@@ -101,14 +104,21 @@ namespace LD51 {
                 if (groundPlane.Raycast(mouseRay, out float distance)) {
                     Vector3 clickPos = mouseRay.origin + mouseRay.direction * distance;
                     GameObject unitInstance = Instantiate(unitPrefab, clickPos, Quaternion.identity);
-                    PathingUnit pathUnit = unitInstance.AddComponent<PathingUnit>();
-                    AddUnit(pathUnit);
+                    AddUnit(unitInstance.GetComponent<PathingUnit>());
                 }
             }
 
+            List<int> removeList = new List<int>();
             for (int i = m_units.Count - 1; i >= 0; i--) {
                 Unit unit = m_units[i];
-                unit.positionOnPath += unit.pathUnit.speed * Time.deltaTime;
+
+                if (unit.pathUnit == null) {
+                    removeList.Add(i);
+                    continue;
+                }
+
+
+                unit.positionOnPath += unit.pathUnit.speed * unit.pathUnit.speedMultiplier * Time.deltaTime;
                 Vector3 currentPos = GetPositionAlongPath(unit.positionOnPath);
 
                 unit.currentPosition = Vector3.Lerp(unit.currentPosition, currentPos, unit.pathUnit.speed * 0.01f);
@@ -120,6 +130,8 @@ namespace LD51 {
                     UnitEscaped?.Invoke(unit);
                 }
             }
+
+            removeList.ForEach(x => m_units.RemoveAt(x));
         }
 
         private void OnDrawGizmos() {

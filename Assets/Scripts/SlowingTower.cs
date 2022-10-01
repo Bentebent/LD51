@@ -10,8 +10,18 @@ namespace LD51 {
         }
 
         // Update is called once per frame
-        void Update() {
+        protected override void Update() {
+            base.Update();
 
+            foreach (var kvp in targets) {
+                kvp.Value.speedMultiplier = 0.5f;
+            }
+
+        }
+
+        protected override void OnTriggerExit(Collider other) {
+            other.GetComponent<PathingUnit>().speedMultiplier = 1.0f;
+            base.OnTriggerExit(other);
         }
     }
 
