@@ -3,13 +3,17 @@ using UnityEngine;
 
 namespace LD51 {
     public class Path : MonoBehaviour {
-
-        class Unit {
-            public PathUnit pathUnit;
+        public class Unit {
+            public PathingUnit pathUnit;
             public Vector3 currentPosition = Vector3.zero;
             public Vector3 offset = Vector3.zero; // Visual offset on the path
             public float positionOnPath = 0f;
         }
+
+        public delegate void UnitEscapedDelegate(Unit unit);
+
+        public event UnitEscapedDelegate UnitEscaped;
+
 
         class Segment {
             public Vector3 start, end;
@@ -73,6 +77,23 @@ namespace LD51 {
             return m_segments[m_segments.Count - 1].end;
         }
 
+        public Unit AddUnit(PathingUnit pathUnit) {
+            Vector2 randomOffset = Random.insideUnitCircle;
+
+            Unit unit = new Unit {
+                pathUnit = pathUnit,
+                currentPosition = m_segments[0].start,
+                offset = new Vector3(randomOffset.x, 0f, randomOffset.y),
+            };
+
+            m_units.Add(unit);
+            return unit;
+        }
+
+        public void RemoveUnit(Unit unit) {
+            m_units.Remove(unit);
+        }
+
         private void Update() {
             if (Input.GetMouseButtonDown(0)) {
                 Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -80,26 +101,24 @@ namespace LD51 {
                 if (groundPlane.Raycast(mouseRay, out float distance)) {
                     Vector3 clickPos = mouseRay.origin + mouseRay.direction * distance;
                     GameObject unitInstance = Instantiate(unitPrefab, clickPos, Quaternion.identity);
-                    PathUnit pathUnit = unitInstance.AddComponent<PathUnit>();
-
-                    Vector2 randomOffset = Random.insideUnitCircle;
-
-                    Unit unit = new Unit {
-                        pathUnit = pathUnit,
-                        currentPosition = clickPos,
-                        offset = new Vector3(randomOffset.x, 0f, randomOffset.y),
-                    };
-                    m_units.Add(unit);
+                    PathingUnit pathUnit = unitInstance.AddComponent<PathingUnit>();
+                    AddUnit(pathUnit);
                 }
             }
 
-
-            foreach (var unit in m_units) {
+            for (int i = m_units.Count - 1; i >= 0; i--) {
+                Unit unit = m_units[i];
                 unit.positionOnPath += unit.pathUnit.speed * Time.deltaTime;
                 Vector3 currentPos = GetPositionAlongPath(unit.positionOnPath);
 
-                unit.currentPosition = Vector3.Lerp(unit.currentPosition, currentPos, 0.01f);
+                unit.currentPosition = Vector3.Lerp(unit.currentPosition, currentPos, unit.pathUnit.speed * 0.01f);
                 unit.pathUnit.transform.position = unit.currentPosition + unit.offset;
+
+                // We can compare here bacuse position is set to end when path is complete
+                if (currentPos == m_segments[m_segments.Count - 1].end) {
+                    m_units.RemoveAt(i);
+                    UnitEscaped?.Invoke(unit);
+                }
             }
         }
 
