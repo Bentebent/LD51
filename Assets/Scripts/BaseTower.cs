@@ -9,8 +9,8 @@ namespace LD51 {
         Dead
     }
     public class BaseTower : MonoBehaviour {
-        public int buildCost = 0;
-        public int buildValue = 0;
+        public float buildCost = 0;
+        public float buildValue = 0;
 
         public TowerState state = TowerState.Building;
 
@@ -32,6 +32,18 @@ namespace LD51 {
             Player player = other.GetComponent<Player>();
             if (player != null) {
             }
+        }
+
+        public bool AddBuildValue(float buildValue) {
+            this.buildValue += buildValue;
+
+            if (this.buildValue >= buildCost) {
+                state = TowerState.Active;
+
+                return true;
+            }
+
+            return false;
         }
     }
 }

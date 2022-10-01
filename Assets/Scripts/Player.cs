@@ -36,6 +36,14 @@ namespace LD51 {
         private Vector3 _targetRotationVector = Vector3.zero;
         private Vector3 _currentVelocity = Vector3.zero;
 
+        public GameObject selectedTower = null;
+        private BaseTower towerInProgress = null;
+
+        public float currentMultiplier = 1;
+        public float score = 0;
+        public int hitsInARow = 0;
+
+
         private void Awake() {
             _characterController = GetComponent<CharacterController>();
 
@@ -65,8 +73,7 @@ namespace LD51 {
 
                 UpdateMovement();
                 UpdateRotation();
-            }
-            else if (state == PlayerState.Dancing) {                   
+            } else if (state == PlayerState.Dancing) {
                 _beatContainer.transform.position = transform.position + _beatContainerOffset;
                 _beatContainer.transform.LookAt(Camera.main.transform);
             }
@@ -79,12 +86,12 @@ namespace LD51 {
             _beatContainer.SetActive(!_beatContainer.activeInHierarchy);
 
             if (state == PlayerState.Moving) {
-                state = PlayerState.Dancing;
-                SongConductor.Instance.GetBeatBoxes();
-                _beatContainer.transform.LookAt(Camera.main.transform);
-            }
-                
-            else {
+                if (PlaceBuilding()) {
+                    state = PlayerState.Dancing;
+                    SongConductor.Instance.GetBeatBoxes();
+                    _beatContainer.transform.LookAt(Camera.main.transform);
+                }
+            } else {
                 state = PlayerState.Moving;
             }
         }
@@ -134,6 +141,30 @@ namespace LD51 {
                 Quaternion targetRotation = Quaternion.LookRotation(_targetRotationVector, Vector3.up);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Mathf.Clamp(Mathf.Abs(Quaternion.Angle(targetRotation, transform.rotation) * 0.1f), 2f, 45f));
             }
+        }
+
+        public void AddHit(float ínverseDistance) {
+            float tempScore = ínverseDistance * 100 * currentMultiplier;
+            score += tempScore;
+            hitsInARow++;
+
+            if(towerInProgress.AddBuildValue(tempScore)) {
+                ToggleState();
+            }
+        }
+
+        public void AddMiss() {
+            Debug.Log("U missed lmao ecks dee");
+            hitsInARow = 0;
+            currentMultiplier = 1;
+        }
+        private bool PlaceBuilding() {
+            //Check if we are overlapping with any existing building
+            //Else place down selected building and start dancing
+
+            towerInProgress = GameObject.Instantiate(selectedTower, transform.position, Quaternion.identity).GetComponent<BaseTower>();
+
+            return true;
         }
     }
 }
