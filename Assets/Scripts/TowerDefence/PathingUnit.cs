@@ -9,5 +9,6 @@ namespace LD51 {
 
         public float health = 100.0f;
         public float speedMultiplier = 1.0f;
+        public int value = 100;
     }
 }

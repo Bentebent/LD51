@@ -10,6 +10,7 @@ public static class Layers {
     public static int BeatBox = LayerMask.NameToLayer("BeatBox");
     public static int Note = LayerMask.NameToLayer("Note");
     public static int Enemy = LayerMask.NameToLayer("Enemy");
+    public static int BuildTile = LayerMask.NameToLayer("BuildTile");
 
     public static int GetMask(int layer) {
         return 1 << layer;

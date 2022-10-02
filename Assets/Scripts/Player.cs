@@ -50,6 +50,8 @@ namespace LD51 {
         public float score = 0;
         public int hitsInARow = 0;
 
+        public int money = 0;
+
         public List<TowerContainer> towerContainers = new List<TowerContainer>();
 
         private void Awake() {
@@ -179,7 +181,6 @@ namespace LD51 {
         }
 
         public void AddMiss() {
-            Debug.Log("U missed lmao ecks dee");
             hitsInARow = 0;
             currentMultiplier = 1;
         }
@@ -190,6 +191,19 @@ namespace LD51 {
             towerInProgress = GameObject.Instantiate(prefab, transform.position, Quaternion.identity).GetComponent<BaseTower>();
 
             return true;
+        }
+
+        public void AddMoney(int money) {
+            this.money += money;
+        }
+
+        public bool RemoveMoney(int cost) {
+            if (money - cost >= 0) {
+                money -= cost;
+                return true;
+            }
+
+            return false;
         }
     }
 }

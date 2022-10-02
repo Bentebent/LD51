@@ -24,12 +24,15 @@ namespace LD51 {
         public TowerType type = TowerType.SingleTarget;
         public BoxCollider buildArea = null;
         public SphereCollider areaOfEffect = null;
+        public Player player = null;
 
         protected Dictionary<int, PathingUnit> targets = new Dictionary<int, PathingUnit>();
 
         private void Awake() {
             buildArea = GetComponent<BoxCollider>();
             areaOfEffect = GetComponent<SphereCollider>();
+
+            player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         }
 
         private void Start() {
