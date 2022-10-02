@@ -252,8 +252,22 @@ namespace LD51 {
             }
         }
 
-        public void AddHit(float ínverseDistance) {
-            float tempScore = ínverseDistance * currentMultiplier;
+        public void AddHit(float inverseDistance) {
+            Debug.Log(inverseDistance);
+            NoteHitStatus.NoteHitType noteHitType;
+            if (inverseDistance > 0.9f) {
+                noteHitType = NoteHitStatus.NoteHitType.Perfect;
+            } else if (inverseDistance > 0.75f) {
+                noteHitType = NoteHitStatus.NoteHitType.Good;
+            } else if (inverseDistance > 0.5f) {
+                noteHitType = NoteHitStatus.NoteHitType.Ok;
+            } else {
+                noteHitType = NoteHitStatus.NoteHitType.Bad;
+            }
+
+            NoteHitStatus.Instance.AddNoteHit(noteHitType);
+
+            float tempScore = inverseDistance * currentMultiplier;
             score += tempScore;
             hitsInARow++;
 
@@ -265,6 +279,8 @@ namespace LD51 {
         public void AddMiss(bool snuckPast) {
             hitsInARow = 0;
             currentMultiplier = 1;
+
+            NoteHitStatus.Instance.AddNoteHit(NoteHitStatus.NoteHitType.Miss);
 
             if (snuckPast && towerInProgress.AddBuildProgress(0.1f)) {
                 ToggleState();
