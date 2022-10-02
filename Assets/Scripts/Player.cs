@@ -109,6 +109,7 @@ namespace LD51 {
             if (state == PlayerState.Moving) {
                 if (PlaceBuilding(selectedTower)) {
                     state = PlayerState.Dancing;
+                    _beatContainer.SetActive(!_beatContainer.activeInHierarchy);
                     SongConductor.Instance.GetBeatBoxes();
                     //_beatContainer.transform.LookAt(Camera.main.transform);
                 }
@@ -116,6 +117,7 @@ namespace LD51 {
                     return;
                 }
             } else {
+                _beatContainer.SetActive(!_beatContainer.activeInHierarchy);
                 state = PlayerState.Moving;
 
                 if (towerInProgress != null && towerInProgress.state == TowerState.Building) {
@@ -125,7 +127,6 @@ namespace LD51 {
                 towerInProgress = null;
             }
 
-            _beatContainer.SetActive(!_beatContainer.activeInHierarchy);
         }
 
         private void GatherInput() {

@@ -20,6 +20,7 @@ namespace LD51 {
     public class BaseTower : MonoBehaviour {
         public float buildCost = 0;
         public float buildValue = 0;
+        public int cost = 0;
 
         public int buildProgress = 0;
         private int notesRequiredToBuild = 25;
@@ -35,6 +36,7 @@ namespace LD51 {
         protected Dictionary<int, PathingUnit> targets = new Dictionary<int, PathingUnit>();
 
         private ProgressBar progressBar;
+        protected Player player;
 
         private void Awake() {
             buildArea = GetComponent<BoxCollider>();
@@ -44,6 +46,10 @@ namespace LD51 {
 
             progressBar = GetComponentInChildren<ProgressBar>();
             progressBar.SetProgress(0f);
+        }
+
+        private void Start() {
+            player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         }
 
         protected virtual void Update() {

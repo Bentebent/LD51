@@ -33,8 +33,6 @@ namespace LD51 {
                 }
                 
             }
-
-            Debug.Log(targets.Count);
         }
 
         protected override void OnTriggerEnter(Collider other) {
