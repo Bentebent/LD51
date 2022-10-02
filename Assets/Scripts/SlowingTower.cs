@@ -9,6 +9,9 @@ namespace LD51 {
         protected override void Update() {
             base.Update();
 
+            if (state == TowerState.Building)
+                return;
+
             foreach (var kvp in targets) {
                 kvp.Value.speedMultiplier = 0.5f;
             }
