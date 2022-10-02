@@ -19,7 +19,8 @@ namespace LD51 {
         }
 
         protected override void OnTriggerExit(Collider other) {
-            other.GetComponent<PathingUnit>().speedMultiplier = 1.0f;
+            if (other.TryGetComponent<PathingUnit>(out PathingUnit unit))
+                unit.speedMultiplier = 1.0f;
             base.OnTriggerExit(other);
         }
 
