@@ -6,6 +6,8 @@ namespace LD51 {
     public class BeatBox : MonoBehaviour {
 
         public KeyCode keyCode;
+        public GameObject explodePrefab;
+        public Transform visual;
 
         private GameObject _noteInside = null;
         private float _maxDist = 0.0f;
@@ -19,12 +21,18 @@ namespace LD51 {
             _owner = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         }
 
+        public void Explode(float size, float duration) {
+            ExplodeArrow explodeArrow = Instantiate(explodePrefab, visual.position, visual.rotation, null).GetComponent<ExplodeArrow>();
+            explodeArrow.size = size;
+            explodeArrow.lifeTime = duration;
+        }
+
         // Update is called once per frame
         void Update() {
             if (Input.GetKeyDown(keyCode)) {
                 if (_noteInside) {
                     float dist = Vector3.Distance(transform.position, _noteInside.transform.position);
-                    _owner.AddHit(1.0f - (dist / _maxDist));
+                    _owner.AddHit(1.0f - (dist / _maxDist), this);
                     Destroy(_noteInside);
                     _noteInside = null;
                 }

@@ -254,8 +254,7 @@ namespace LD51 {
             }
         }
 
-        public void AddHit(float inverseDistance) {
-            Debug.Log(inverseDistance);
+        public void AddHit(float inverseDistance, BeatBox beatBox) {
             NoteHitStatus.NoteHitType noteHitType;
             if (inverseDistance > 0.9f) {
                 noteHitType = NoteHitStatus.NoteHitType.Perfect;
@@ -266,6 +265,8 @@ namespace LD51 {
             } else {
                 noteHitType = NoteHitStatus.NoteHitType.Bad;
             }
+
+            beatBox.Explode(Mathf.Lerp(1.2f, 3f, inverseDistance), Mathf.Lerp(0.1f, 0.25f, inverseDistance));
 
             NoteHitStatus.Instance.AddNoteHit(noteHitType);
 

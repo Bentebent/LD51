@@ -1548,7 +1548,7 @@ PrefabInstance:
     - target: {fileID: 1095556005626526247, guid: 99920a42fe03f82448b1f8eac712b42a, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 3460265418689481279, guid: 5f7cd91ccb4b0c34a99fc674ca9bd8fe, type: 3}
+      objectReference: {fileID: -3088591776685708268, guid: e91462e5003ae2443a0b87538644a3c8, type: 3}
     - target: {fileID: 1225084956591113997, guid: 99920a42fe03f82448b1f8eac712b42a, type: 3}
       propertyPath: m_Name
       value: ArrowRight
@@ -1621,6 +1621,14 @@ PrefabInstance:
       propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3961006627675492336, guid: 99920a42fe03f82448b1f8eac712b42a, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3961006627675492336, guid: 99920a42fe03f82448b1f8eac712b42a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 235a05b7d8be57f4c9fb92151fec5cc1, type: 2}
     - target: {fileID: 3986822982911480915, guid: 99920a42fe03f82448b1f8eac712b42a, type: 3}
       propertyPath: m_IsTrigger
       value: 1
@@ -1666,7 +1674,7 @@ PrefabInstance:
     - target: {fileID: 1095556005626526247, guid: 99920a42fe03f82448b1f8eac712b42a, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 3460265418689481279, guid: 5f7cd91ccb4b0c34a99fc674ca9bd8fe, type: 3}
+      objectReference: {fileID: -3088591776685708268, guid: e91462e5003ae2443a0b87538644a3c8, type: 3}
     - target: {fileID: 1225084956591113997, guid: 99920a42fe03f82448b1f8eac712b42a, type: 3}
       propertyPath: m_Name
       value: ArrowLeft
@@ -1751,6 +1759,14 @@ PrefabInstance:
       propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3961006627675492336, guid: 99920a42fe03f82448b1f8eac712b42a, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3961006627675492336, guid: 99920a42fe03f82448b1f8eac712b42a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 235a05b7d8be57f4c9fb92151fec5cc1, type: 2}
     - target: {fileID: 3986822982911480915, guid: 99920a42fe03f82448b1f8eac712b42a, type: 3}
       propertyPath: m_IsTrigger
       value: 1
@@ -1796,7 +1812,7 @@ PrefabInstance:
     - target: {fileID: 1095556005626526247, guid: 99920a42fe03f82448b1f8eac712b42a, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 3460265418689481279, guid: 5f7cd91ccb4b0c34a99fc674ca9bd8fe, type: 3}
+      objectReference: {fileID: -3088591776685708268, guid: e91462e5003ae2443a0b87538644a3c8, type: 3}
     - target: {fileID: 1225084956591113997, guid: 99920a42fe03f82448b1f8eac712b42a, type: 3}
       propertyPath: m_Name
       value: ArrowUp
@@ -1881,6 +1897,14 @@ PrefabInstance:
       propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3961006627675492336, guid: 99920a42fe03f82448b1f8eac712b42a, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3961006627675492336, guid: 99920a42fe03f82448b1f8eac712b42a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 235a05b7d8be57f4c9fb92151fec5cc1, type: 2}
     - target: {fileID: 3986822982911480915, guid: 99920a42fe03f82448b1f8eac712b42a, type: 3}
       propertyPath: m_IsTrigger
       value: 1
@@ -1926,7 +1950,7 @@ PrefabInstance:
     - target: {fileID: 1095556005626526247, guid: 99920a42fe03f82448b1f8eac712b42a, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 3460265418689481279, guid: 5f7cd91ccb4b0c34a99fc674ca9bd8fe, type: 3}
+      objectReference: {fileID: -3088591776685708268, guid: e91462e5003ae2443a0b87538644a3c8, type: 3}
     - target: {fileID: 1225084956591113997, guid: 99920a42fe03f82448b1f8eac712b42a, type: 3}
       propertyPath: m_Name
       value: ArrowDown
@@ -2011,6 +2035,14 @@ PrefabInstance:
       propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3961006627675492336, guid: 99920a42fe03f82448b1f8eac712b42a, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3961006627675492336, guid: 99920a42fe03f82448b1f8eac712b42a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 235a05b7d8be57f4c9fb92151fec5cc1, type: 2}
     - target: {fileID: 3986822982911480915, guid: 99920a42fe03f82448b1f8eac712b42a, type: 3}
       propertyPath: m_IsTrigger
       value: 1
