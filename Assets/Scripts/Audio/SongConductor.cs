@@ -96,7 +96,7 @@ namespace LD51 {
             loopPositionInBeats = songPositionInBeats - completedLoops * beatsPerLoop;
 
             int quarterBeat = Mathf.FloorToInt(songPositionInBeats * 4);
-            if (Mathf.FloorToInt(prevSongPositionInBeats * 4) != Mathf.FloorToInt(songPositionInBeats * 4)) {
+            if (Mathf.FloorToInt(prevSongPositionInBeats * 4) < Mathf.FloorToInt(songPositionInBeats * 4)) {
                 Beats?.Invoke(quarterBeat%4);
             }
 
@@ -114,7 +114,7 @@ namespace LD51 {
 
                 int notesPerBeat = Random.Range(0f, 1f) > 0.2f ? 1 : 2;
                 int beat = Mathf.FloorToInt(songPositionInBeats * notesPerBeat);
-                if (Mathf.FloorToInt(prevSongPositionInBeats * notesPerBeat) != Mathf.FloorToInt(songPositionInBeats * notesPerBeat) && player.NotesRequiredToBuildCurrentTower > 0) {
+                if (Mathf.FloorToInt(prevSongPositionInBeats * notesPerBeat) < Mathf.FloorToInt(songPositionInBeats * notesPerBeat) && player.NotesRequiredToBuildCurrentTower > 0) {
                     BeatBox beatBox = GetNextNote(beat);
                     GameObject notePrefab = beatBox.notePrefab;
                     Note noteInstance = Instantiate(notePrefab).GetComponent<Note>();
