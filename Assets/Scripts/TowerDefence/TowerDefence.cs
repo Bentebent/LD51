@@ -19,6 +19,9 @@ namespace LD51 {
         [SerializeField]
         private int spawnMax = 0;
 
+        [SerializeField]
+        private int waitTime = 0;
+
         private List<Path.Unit> m_units = new List<Path.Unit>();
 
         float startTime = 0.0f;
@@ -39,7 +42,7 @@ namespace LD51 {
                 SpawnWave(Random.Range(5, 10));
             }
 
-            if (Time.time - lastSpawn > spawnTimer) {
+            if (Time.time - lastSpawn - waitTime > spawnTimer) {
                 SpawnWave(Random.Range(spawnMin, spawnMax) * ((Mathf.FloorToInt(Time.timeSinceLevelLoad / 55) + 1))) ;
                 lastSpawn = Time.time;
             }

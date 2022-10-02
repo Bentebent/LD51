@@ -13253,7 +13253,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24186
+  m_Name: pb_Mesh30456
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -14789,11 +14789,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3971062344017195814, guid: f10acabf18c9d5a4695d780984cd4e27, type: 3}
       propertyPath: spawnMax
-      value: 10
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3971062344017195814, guid: f10acabf18c9d5a4695d780984cd4e27, type: 3}
       propertyPath: spawnMin
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3971062344017195814, guid: f10acabf18c9d5a4695d780984cd4e27, type: 3}
       propertyPath: spawnTimer
@@ -16002,6 +16002,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3971062344017195814, guid: f10acabf18c9d5a4695d780984cd4e27, type: 3}
+      propertyPath: waitTime
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 3971062344017195814, guid: f10acabf18c9d5a4695d780984cd4e27, type: 3}
       propertyPath: spawnTimer
       value: 30
       objectReference: {fileID: 0}
@@ -16855,11 +16859,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3971062344017195814, guid: f10acabf18c9d5a4695d780984cd4e27, type: 3}
       propertyPath: spawnMax
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3971062344017195814, guid: f10acabf18c9d5a4695d780984cd4e27, type: 3}
       propertyPath: spawnMin
-      value: 2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3971062344017195814, guid: f10acabf18c9d5a4695d780984cd4e27, type: 3}
+      propertyPath: waitTime
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 3971062344017195814, guid: f10acabf18c9d5a4695d780984cd4e27, type: 3}
       propertyPath: spawnTimer
@@ -16869,6 +16877,10 @@ PrefabInstance:
       propertyPath: m_unitPrefab
       value: 
       objectReference: {fileID: 3346884828010181067, guid: a480c3020bdd51a4f93b0061a65b43f1, type: 3}
+    - target: {fileID: 3971062344017195814, guid: f10acabf18c9d5a4695d780984cd4e27, type: 3}
+      propertyPath: firstTimeSpawn
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 4319320387644583433, guid: f10acabf18c9d5a4695d780984cd4e27, type: 3}
       propertyPath: m_RootOrder
       value: 1
