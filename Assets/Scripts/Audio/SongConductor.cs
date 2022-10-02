@@ -43,6 +43,18 @@ namespace LD51 {
 
         private float _waitTimer = 0.0f;
 
+        //the number of beats in each loop
+        public float beatsPerLoop;
+
+        //the total number of loops completed since the looping clip first started
+        public int completedLoops = 0;
+
+        //The current position of the song within the loop in beats.
+        public float loopPositionInBeats;
+
+        //The current relative position of the song within the loop measured between 0 and 1.
+        public float loopPositionInAnalog;
+
         void Awake() {
             if (_instance == null) {
                 _instance = this;
@@ -72,6 +84,11 @@ namespace LD51 {
 
             //determine how many beats since the song started
             songPositionInBeats = songPosition / secPerBeat;
+
+            //calculate the loop position
+            if (songPositionInBeats >= (completedLoops + 1) * beatsPerLoop)
+                completedLoops++;
+            loopPositionInBeats = songPositionInBeats - completedLoops * beatsPerLoop;
 
             Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 

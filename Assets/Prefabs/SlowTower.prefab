@@ -86,8 +86,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 058f25ef86952194cb0aea6676defbc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildCost: 5000
+  buildCost: 600
   buildValue: 0
   state: 0
+  type: 3
   buildArea: {fileID: 0}
   areaOfEffect: {fileID: 0}

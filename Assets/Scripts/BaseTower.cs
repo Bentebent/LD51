@@ -8,11 +8,20 @@ namespace LD51 {
         Active,
         Dead
     }
+
+    public enum TowerType {
+        SingleTarget,
+        Splash,
+        DOT,
+        Slow
+    }
+
     public class BaseTower : MonoBehaviour {
         public float buildCost = 0;
         public float buildValue = 0;
 
         public TowerState state = TowerState.Building;
+        public TowerType type = TowerType.SingleTarget;
         public BoxCollider buildArea = null;
         public SphereCollider areaOfEffect = null;
 
@@ -57,6 +66,7 @@ namespace LD51 {
 
             if (this.buildValue >= buildCost) {
                 state = TowerState.Active;
+                AudioMixer.Instance.AddTower(this);
 
                 return true;
             }

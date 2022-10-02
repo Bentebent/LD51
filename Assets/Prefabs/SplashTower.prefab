@@ -86,9 +86,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9b950b706ef9374c9a7a4835a601326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildCost: 5000
+  buildCost: 600
   buildValue: 0
   state: 0
+  type: 1
   buildArea: {fileID: 0}
   areaOfEffect: {fileID: 0}
   explosionPrefab: {fileID: 1296834671334184885, guid: 1149bab622dba1f4fb55cd9ee32fe311, type: 3}
