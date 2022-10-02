@@ -14,7 +14,7 @@ namespace LD51 {
 
         public event UnitEscapedDelegate UnitEscaped;
 
-
+        private Player player = null;
         class Segment {
             public Vector3 start, end;
 
@@ -64,7 +64,7 @@ namespace LD51 {
         }
 
         private void Start() {
-
+            player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         }
 
         Vector3 GetPositionAlongPath(float distance, out Segment outputSegment) {
@@ -102,6 +102,7 @@ namespace LD51 {
         }
 
         private void Update() {
+
             List<int> removeList = new List<int>();
             for (int i = m_units.Count - 1; i >= 0; i--) {
                 Unit unit = m_units[i];

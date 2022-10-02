@@ -7,7 +7,8 @@ namespace LD51 {
 
     public enum PlayerState {
         Moving,
-        Dancing
+        Dancing,
+        Dead
     }
 
     [Serializable]
@@ -100,6 +101,10 @@ namespace LD51 {
 
         private void onEscaped(Path.Unit unit) {
             lives -= 1;
+
+            if (lives <= 0) {
+                state = PlayerState.Dead;
+            }
         }
 
         public void StartBuildTower(TowerType type) {
@@ -117,6 +122,10 @@ namespace LD51 {
 
         // Update is called once per frame
         private void Update() {
+            if (state == PlayerState.Dead) {
+                _beatContainer.SetActive(false);
+                return;
+            }
 
             if (state == PlayerState.Moving) {
                 closestBuildTile = GetClosestBuildTile();
