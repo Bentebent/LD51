@@ -10,6 +10,15 @@ namespace LD51 {
         [SerializeField]
         private Path m_path;
 
+        [SerializeField]
+        private float spawnTimer = 0.0f;
+
+        [SerializeField]
+        private int spawnMin = 0;
+
+        [SerializeField]
+        private int spawnMax = 0;
+
         private List<Path.Unit> m_units = new List<Path.Unit>();
         float lastSpawn = 0.0f;
         private void Start() {
@@ -27,8 +36,8 @@ namespace LD51 {
                 SpawnWave(Random.Range(5, 10));
             }
 
-            if (Time.time - lastSpawn > 10.0f) {
-                SpawnWave(Random.Range(5, 10));
+            if (Time.time - lastSpawn > spawnTimer) {
+                SpawnWave(Random.Range(spawnMin, spawnMax));
                 lastSpawn = Time.time;
             }
         }
