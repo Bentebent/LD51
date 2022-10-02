@@ -67,6 +67,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SplashTower
       objectReference: {fileID: 0}
+    - target: {fileID: 7661826180004486081, guid: e3a9279b73d6e5a4b86566064cefd463, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3a9279b73d6e5a4b86566064cefd463, type: 3}
 --- !u!1 &3851510279564730346 stripped
@@ -88,8 +92,84 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildCost: 600
   buildValue: 0
+  cost: 300
   state: 0
   type: 1
   buildArea: {fileID: 0}
   areaOfEffect: {fileID: 0}
+  player: {fileID: 0}
   explosionPrefab: {fileID: 1296834671334184885, guid: 1149bab622dba1f4fb55cd9ee32fe311, type: 3}
+--- !u!4 &8893515367624514993 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7661826180004486081, guid: e3a9279b73d6e5a4b86566064cefd463, type: 3}
+  m_PrefabInstance: {fileID: 1240842072576493168}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4727850600707687218
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8893515367624514993}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 05e7181952e029a49b1111187eaffe3c, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05e7181952e029a49b1111187eaffe3c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05e7181952e029a49b1111187eaffe3c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05e7181952e029a49b1111187eaffe3c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05e7181952e029a49b1111187eaffe3c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05e7181952e029a49b1111187eaffe3c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05e7181952e029a49b1111187eaffe3c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05e7181952e029a49b1111187eaffe3c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05e7181952e029a49b1111187eaffe3c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05e7181952e029a49b1111187eaffe3c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05e7181952e029a49b1111187eaffe3c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05e7181952e029a49b1111187eaffe3c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05e7181952e029a49b1111187eaffe3c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05e7181952e029a49b1111187eaffe3c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 05e7181952e029a49b1111187eaffe3c, type: 3}
+      propertyPath: m_Name
+      value: melody_tower
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 05e7181952e029a49b1111187eaffe3c, type: 3}

@@ -8,11 +8,6 @@ namespace LD51 {
 
         float timeSinceLastShot = 0.0f;
 
-        // Start is called before the first frame update
-        void Start() {
-
-        }
-
         // Update is called once per frame
         protected override void Update() {
             base.Update();
@@ -28,6 +23,7 @@ namespace LD51 {
                 if (target.Value != null) {
                     target.Value.health -= 50;
                     if (target.Value.health <= 0) {
+                        player.AddMoney(target.Value.value);
                         targets.Remove(target.Key);
                         Destroy(target.Value.gameObject);
                     }

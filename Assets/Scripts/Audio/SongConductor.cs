@@ -18,8 +18,6 @@ namespace LD51 {
         //Current song position, in beats
         public float songPositionInBeats;
 
-        public int prevSongPosInBeatsTruncated;
-
         //How many seconds have passed since the song started
         public float dspSongTime;
 
@@ -37,9 +35,9 @@ namespace LD51 {
         //Conductor instance
         public static SongConductor Instance => _instance;
 
-        public static List<GameObject> spawnBeat = new List<GameObject>();
+        public static List<BeatBox> spawnBeat = new List<BeatBox>();
 
-        private List<GameObject> _inProgressNotes = new List<GameObject>();
+        private List<Note> _inProgressNotes = new List<Note>();
 
         private float _waitTimer = 0.0f;
 
@@ -54,6 +52,9 @@ namespace LD51 {
 
         //The current relative position of the song within the loop measured between 0 and 1.
         public float loopPositionInAnalog;
+
+        public delegate void BeatDelegate(int quarterBeat);
+        public event BeatDelegate Beats;
 
         void Awake() {
             if (_instance == null) {
@@ -80,7 +81,11 @@ namespace LD51 {
 
         void Update() {
             //determine how many seconds since the song started
-            songPosition = (float)(AudioSettings.dspTime - dspSongTime - firstBeatOffset);
+            //songPosition = (float)(AudioSettings.dspTime - dspSongTime - firstBeatOffset);
+            songPosition = (musicSource.timeSamples + (int)(firstBeatOffset * musicSource.clip.frequency)) / (float)musicSource.clip.frequency;
+
+
+            float prevSongPositionInBeats = songPositionInBeats;
 
             //determine how many beats since the song started
             songPositionInBeats = songPosition / secPerBeat;
@@ -89,6 +94,11 @@ namespace LD51 {
             if (songPositionInBeats >= (completedLoops + 1) * beatsPerLoop)
                 completedLoops++;
             loopPositionInBeats = songPositionInBeats - completedLoops * beatsPerLoop;
+
+            int quarterBeat = Mathf.FloorToInt(songPositionInBeats * 4);
+            if (Mathf.FloorToInt(prevSongPositionInBeats * 4) != Mathf.FloorToInt(songPositionInBeats * 4)) {
+                Beats?.Invoke(quarterBeat%4);
+            }
 
             Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 
@@ -102,28 +112,28 @@ namespace LD51 {
                 if (Time.time - _waitTimer < 1.0f)
                     return;
 
-                int beatToCalc = Mathf.FloorToInt(songPositionInBeats) + beatsShownInAdvance;
-                if (beatToCalc - prevSongPosInBeatsTruncated > 0) {
+                int notesPerBeat = Random.Range(0f, 1f) > 0.2f ? 1 : 2;
+                int beat = Mathf.FloorToInt(songPositionInBeats * notesPerBeat);
+                if (Mathf.FloorToInt(prevSongPositionInBeats * notesPerBeat) != Mathf.FloorToInt(songPositionInBeats * notesPerBeat)) {
+                    BeatBox beatBox = GetNextNote(beat);
+                    GameObject notePrefab = beatBox.notePrefab;
+                    Note noteInstance = Instantiate(notePrefab).GetComponent<Note>();
 
-                    GameObject spawn = GetNextNote(beatToCalc);
-                    GameObject note = spawn.GetComponent<BeatBox>().notePrefab;
-                    GameObject go = GameObject.Instantiate(note);
+                    noteInstance.noteBeat = Mathf.FloorToInt(beat);
+                    noteInstance.goalPos = beatBox.transform.position;
+                    noteInstance.birthDspTime = (float)AudioSettings.dspTime;
+                    noteInstance.goalDspTime = noteInstance.birthDspTime + secPerBeat * beatsShownInAdvance;
+                    noteInstance.transform.position = beatBox.transform.position - beatBox.transform.up * 5;
+                    noteInstance.transform.rotation = beatBox.transform.rotation;
+                    noteInstance.gameObject.SetActive(true);
 
-                    go.GetComponent<Note>().noteBeat = Mathf.FloorToInt(beatToCalc);
-                    go.GetComponent<Note>().goalPos = spawn.transform.position;
-                    //go.transform.position = new Vector3(spawn.transform.position.x, 0.5f, spawn.transform.position.z);
-                    go.transform.position = spawn.transform.position - spawn.transform.up * 5;
-                    go.transform.rotation = spawn.transform.rotation;
-                    go.SetActive(true);
-                    prevSongPosInBeatsTruncated = beatToCalc;
-
-                    _inProgressNotes.Add(go);
+                    _inProgressNotes.Add(noteInstance);
                 }
             } else {
                 if (_inProgressNotes.Count > 0) {
-                    foreach (GameObject go in _inProgressNotes) {
-                        if (go != null) {
-                            Destroy(go);
+                    foreach (Note note in _inProgressNotes) {
+                        if (note != null) {
+                            Destroy(note.gameObject);
                         }
                     }
 
@@ -134,13 +144,16 @@ namespace LD51 {
             }
         }
 
-        private GameObject GetNextNote(int truncatedBeatPos) {
+        private BeatBox GetNextNote(int truncatedBeatPos) {
             return spawnBeat[Random.Range(0, spawnBeat.Count)];
         }
 
         public void GetBeatBoxes() {
             spawnBeat.Clear();
-            spawnBeat.AddRange(GameObject.FindGameObjectsWithTag("BeatBox"));
+            var beats = GameObject.FindGameObjectsWithTag("BeatBox");
+            foreach (var beat in beats) {
+                spawnBeat.Add(beat.GetComponent<BeatBox>());
+            }
         }
     }
 

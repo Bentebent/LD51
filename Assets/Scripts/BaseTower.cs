@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,6 +21,8 @@ namespace LD51 {
         public float buildCost = 0;
         public float buildValue = 0;
 
+        public int cost = 0;
+
         public TowerState state = TowerState.Building;
         public TowerType type = TowerType.SingleTarget;
         public BoxCollider buildArea = null;
@@ -33,10 +36,6 @@ namespace LD51 {
             areaOfEffect = GetComponent<SphereCollider>();
 
             player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        }
-
-        private void Start() {
-
         }
 
         protected virtual void Update() {

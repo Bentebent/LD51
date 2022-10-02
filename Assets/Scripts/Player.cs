@@ -50,7 +50,7 @@ namespace LD51 {
         public float score = 0;
         public int hitsInARow = 0;
 
-        public int money = 0;
+        public int money = 100;
 
         public List<TowerContainer> towerContainers = new List<TowerContainer>();
 
@@ -104,13 +104,16 @@ namespace LD51 {
         }
 
         public void ToggleState() {
-            _beatContainer.SetActive(!_beatContainer.activeInHierarchy);
+            
 
             if (state == PlayerState.Moving) {
                 if (PlaceBuilding(selectedTower)) {
                     state = PlayerState.Dancing;
                     SongConductor.Instance.GetBeatBoxes();
                     //_beatContainer.transform.LookAt(Camera.main.transform);
+                }
+                else {
+                    return;
                 }
             } else {
                 state = PlayerState.Moving;
@@ -121,6 +124,8 @@ namespace LD51 {
 
                 towerInProgress = null;
             }
+
+            _beatContainer.SetActive(!_beatContainer.activeInHierarchy);
         }
 
         private void GatherInput() {
@@ -188,9 +193,11 @@ namespace LD51 {
             //Check if we are overlapping with any existing building
             //Else place down selected building and start dancing
 
-            towerInProgress = GameObject.Instantiate(prefab, transform.position, Quaternion.identity).GetComponent<BaseTower>();
-
-            return true;
+            if (RemoveMoney(prefab.GetComponent<BaseTower>().cost)) {
+                towerInProgress = GameObject.Instantiate(prefab, transform.position, Quaternion.identity).GetComponent<BaseTower>();
+                return true;
+            }
+            return false;
         }
 
         public void AddMoney(int money) {
