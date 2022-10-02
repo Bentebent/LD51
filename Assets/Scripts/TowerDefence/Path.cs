@@ -67,16 +67,19 @@ namespace LD51 {
 
         }
 
-        Vector3 GetPositionAlongPath(float distance) {
+        Vector3 GetPositionAlongPath(float distance, out Segment outputSegment) {
+
             float totalDistance = 0f;
             foreach (Segment segment in m_segments) {
                 float distanceIntoSegment = distance - totalDistance;
                 totalDistance += segment.Length;
                 if (distanceIntoSegment <= segment.Length) {
+                    outputSegment = segment;
                     return segment.GetPoint(distanceIntoSegment / segment.Length);
                 }
             }
 
+            outputSegment = m_segments[m_segments.Count - 1];
             return m_segments[m_segments.Count - 1].end;
         }
 
@@ -119,10 +122,13 @@ namespace LD51 {
 
 
                 unit.positionOnPath += unit.pathUnit.speed * unit.pathUnit.speedMultiplier * Time.deltaTime;
-                Vector3 currentPos = GetPositionAlongPath(unit.positionOnPath);
+                Vector3 currentPos = GetPositionAlongPath(unit.positionOnPath, out Segment outputSegment);
 
                 unit.currentPosition = Vector3.Lerp(unit.currentPosition, currentPos, unit.pathUnit.speed * 0.01f);
                 unit.pathUnit.transform.position = unit.currentPosition + unit.offset;
+                unit.pathUnit.transform.LookAt(outputSegment.end);
+
+              
 
                 // We can compare here bacuse position is set to end when path is complete
                 if (currentPos == m_segments[m_segments.Count - 1].end) {
