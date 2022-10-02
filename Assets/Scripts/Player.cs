@@ -162,6 +162,8 @@ namespace LD51 {
                 UpdateRotation();
 
             } else if (state == PlayerState.Dancing) {
+
+                _towerButtonsContainer.SetActive(false);
                 //_beatContainer.transform.position = transform.position + _beatContainerOffset;
                 //_beatContainer.transform.LookAt(Camera.main.transform);
 
@@ -179,7 +181,7 @@ namespace LD51 {
 
             if (state == PlayerState.Moving) {
                 if (PlaceBuilding(selectedTower)) {
-                    _towerButtonsContainer.SetActive(false);
+                    //_towerButtonsContainer.SetActive(false);
                     state = PlayerState.Dancing;
                     _beatContainer.SetActive(!_beatContainer.activeInHierarchy);
                     SongConductor.Instance.GetBeatBoxes();
@@ -312,6 +314,17 @@ namespace LD51 {
             if (money - cost >= 0) {
                 money -= cost;
                 return true;
+            }
+
+            return false;
+        }
+
+        public bool CanAfford(TowerType towerType) {
+            foreach (TowerContainer tc in towerContainers) {
+                BaseTower baseTower = tc.prefab.GetComponent<BaseTower>();
+                if (baseTower.type == towerType) {
+                    return baseTower.cost <= money;
+                }
             }
 
             return false;
