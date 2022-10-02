@@ -320,15 +320,19 @@ namespace LD51 {
             return false;
         }
 
-        public bool CanAfford(TowerType towerType) {
+        public int GetCost(TowerType towerType) {
             foreach (TowerContainer tc in towerContainers) {
                 BaseTower baseTower = tc.prefab.GetComponent<BaseTower>();
                 if (baseTower.type == towerType) {
-                    return baseTower.cost <= money;
+                    return baseTower.cost;
                 }
             }
 
-            return false;
+            return int.MaxValue;
+        }
+
+        public bool CanAfford(TowerType towerType) {
+            return GetCost(towerType) <= money;
         }
     }
 }

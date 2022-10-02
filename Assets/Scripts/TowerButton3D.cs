@@ -7,6 +7,7 @@ namespace LD51 {
     public class TowerButton3D : MonoBehaviour {
         public GameObject icon;
         public GameObject iconDisabled;
+        public GameObject tooltip;
 
         public TowerType type;
 
@@ -22,15 +23,30 @@ namespace LD51 {
             }
         }
 
+        private void OnDisable() {
+            if (tooltip != null) {
+                tooltip.SetActive(false);
+            }
+        }
+
         private void OnMouseOver() {
             icon.transform.localScale = Vector3.one * 1.25f;
+            if (tooltip != null) {
+                tooltip.SetActive(true);
+            }
         }
 
         private void OnMouseExit() {
+            if (tooltip != null) {
+                tooltip.SetActive(false);
+            }
             icon.transform.localScale = Vector3.one;
         }
 
         private void OnMouseDown() {
+            if (tooltip != null) {
+                tooltip.SetActive(false);
+            }
             ClickEvent?.Invoke(type);
         }
     }
