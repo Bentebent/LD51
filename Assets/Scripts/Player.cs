@@ -141,6 +141,10 @@ namespace LD51 {
             } else if (state == PlayerState.Dancing) {
                 //_beatContainer.transform.position = transform.position + _beatContainerOffset;
                 //_beatContainer.transform.LookAt(Camera.main.transform);
+
+                if (Input.GetKey(KeyCode.Escape)) {
+                    ToggleState();
+                }
             }
         }
 
@@ -167,6 +171,7 @@ namespace LD51 {
                 _towerButtonsContainer.SetActive(true);
 
                 if (towerInProgress != null && towerInProgress.state == TowerState.Building) {
+                    money += towerInProgress.cost;
                     closestBuildTile.Occupied = false;
                     Destroy(towerInProgress.gameObject);
                 } else {
