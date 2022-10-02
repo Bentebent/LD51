@@ -56,7 +56,6 @@ namespace LD51 {
 
                 float vol = scale(0.0f, 10.0f, 0.2f, 0.0f, minDist);
                 track.track.volume = vol;
-                Debug.Log(vol);
             }
         }
 

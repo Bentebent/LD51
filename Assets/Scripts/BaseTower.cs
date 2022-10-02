@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,8 +33,19 @@ namespace LD51 {
             areaOfEffect = GetComponent<SphereCollider>();
         }
 
-        private void Start() {
+        public virtual void Start() {
+            SongConductor.Instance.Beats += OnBeat;
+        }
 
+        public virtual void OnDestroy() {
+            SongConductor.Instance.Beats -= OnBeat;
+        }
+
+        private void OnBeat(int quarterBeat) {
+            Debug.Log(quarterBeat);
+            if (quarterBeat == 0) {
+                transform.localScale = new Vector3(1f, 0.9f, 1f);
+            }
         }
 
         protected virtual void Update() {
@@ -45,6 +57,8 @@ namespace LD51 {
             }
 
             removeIds.ForEach(x => targets.Remove(x));
+
+            transform.localScale = Vector3.MoveTowards(transform.localScale, Vector3.one, 1.0f * Time.deltaTime);
         }
 
         protected virtual void OnTriggerEnter(Collider other) {
