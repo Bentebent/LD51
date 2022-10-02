@@ -61,6 +61,8 @@ namespace LD51 {
 
         public GameObject placementIndicator;
 
+        public int NotesRequiredToBuildCurrentTower { get; set; } = 0;
+
         BuildTile GetClosestBuildTile() {
             float closestDist = float.MaxValue;
             BuildTile closest = null;
@@ -253,6 +255,7 @@ namespace LD51 {
             if (RemoveMoney(prefab.GetComponent<BaseTower>().cost)) {
                 towerInProgress = GameObject.Instantiate(prefab, closestBuildTile.transform.position + Vector3.up * 0.6f, Quaternion.identity).GetComponent<BaseTower>();
                 closestBuildTile.Occupied = true;
+                NotesRequiredToBuildCurrentTower = towerInProgress.NotesRequiredToBuild;
                 return true;
             }
             return false;
