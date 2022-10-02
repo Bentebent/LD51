@@ -11,9 +11,10 @@ namespace LD51 {
         private Path m_path;
 
         private List<Path.Unit> m_units = new List<Path.Unit>();
-
+        float lastSpawn = 0.0f;
         private void Start() {
             m_path.UnitEscaped += OnUnitEscaped;
+            lastSpawn = Time.time;
         }
 
         private void OnUnitEscaped(Path.Unit unit) {
@@ -24,6 +25,11 @@ namespace LD51 {
         private void Update() {
             if (Input.GetKeyDown(KeyCode.P)) {
                 SpawnWave(Random.Range(5, 10));
+            }
+
+            if (Time.time - lastSpawn > 10.0f) {
+                SpawnWave(Random.Range(5, 10));
+                lastSpawn = Time.time;
             }
         }
 
