@@ -92,6 +92,7 @@ namespace LD51 {
                 offset = new Vector3(randomOffset.x, 0f, randomOffset.y),
             };
 
+            pathUnit.gameObject.transform.position = unit.currentPosition + unit.offset;
             m_units.Add(unit);
             return unit;
         }
