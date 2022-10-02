@@ -173,16 +173,20 @@ namespace LD51 {
             score += tempScore;
             hitsInARow++;
 
-            if(towerInProgress.AddBuildValue(tempScore)) {
+            if(towerInProgress.AddBuildProgress(tempScore)) {
                 ToggleState();
             }
         }
 
         public void AddMiss() {
-            Debug.Log("U missed lmao ecks dee");
             hitsInARow = 0;
             currentMultiplier = 1;
+
+            if (towerInProgress.AddBuildProgress(0.1f)) {
+                ToggleState();
+            }
         }
+
         private bool PlaceBuilding(GameObject prefab) {
             //Check if we are overlapping with any existing building
             //Else place down selected building and start dancing
