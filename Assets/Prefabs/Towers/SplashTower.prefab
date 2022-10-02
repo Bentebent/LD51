@@ -110,7 +110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildCost: 600
   buildValue: 0
-  cost: 0
+  cost: 300
   buildProgress: 0
   state: 0
   type: 1
