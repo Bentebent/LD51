@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7931,7 +7931,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: db4a63d4d2ba8c74086d0cf66505ef54, type: 3}
+  m_audioClip: {fileID: 8300000, guid: d6d2c1b6c795e8f4da7ecb2c49aa8333, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0
   m_Pitch: 1
@@ -8027,7 +8027,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: dbcdfe88e678fb345b57ac5c7ab3e1d8, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 72b45da92926d0d469a718781f68f45d, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0
   m_Pitch: 1
@@ -8123,7 +8123,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: f91c467c8ac749446b11e8853297e6dd, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 2df8bb9bb818a544baf823cead42cbcf, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0
   m_Pitch: 1
@@ -8219,7 +8219,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: e9a80737900c8f348b0463eefe207801, type: 3}
+  m_audioClip: {fileID: 8300000, guid: bb1746fdfd4296f4896300ac3ba64e0b, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0
   m_Pitch: 1
@@ -16336,7 +16336,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6167096586650748, guid: 78b438acf1c954344a8913f2ef5ea886, type: 3}
       propertyPath: firstBeatOffset
-      value: -0.15
+      value: -0.05
       objectReference: {fileID: 0}
     - target: {fileID: 6167096586650749, guid: 78b438acf1c954344a8913f2ef5ea886, type: 3}
       propertyPath: m_RootOrder
@@ -16397,7 +16397,7 @@ PrefabInstance:
     - target: {fileID: 6167096586650751, guid: 78b438acf1c954344a8913f2ef5ea886, type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: e998149a0c0f809499647e71a06e0d04, type: 3}
+      objectReference: {fileID: 8300000, guid: 3be97a609dd921e4384a3152747b1972, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78b438acf1c954344a8913f2ef5ea886, type: 3}
 --- !u!1001 &1976618448
