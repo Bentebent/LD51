@@ -20,10 +20,13 @@ namespace LD51 {
         private int spawnMax = 0;
 
         private List<Path.Unit> m_units = new List<Path.Unit>();
+
+        float startTime = 0.0f;
         float lastSpawn = 0.0f;
         private void Start() {
             m_path.UnitEscaped += OnUnitEscaped;
             lastSpawn = Time.time;
+            startTime = Time.time;
         }
 
         private void OnUnitEscaped(Path.Unit unit) {
@@ -37,7 +40,7 @@ namespace LD51 {
             }
 
             if (Time.time - lastSpawn > spawnTimer) {
-                SpawnWave(Random.Range(spawnMin, spawnMax));
+                SpawnWave(Random.Range(spawnMin, spawnMax) * ((Mathf.FloorToInt(Time.timeSinceLevelLoad / 55) + 1))) ;
                 lastSpawn = Time.time;
             }
         }

@@ -102,16 +102,6 @@ namespace LD51 {
         }
 
         private void Update() {
-            if (Input.GetMouseButtonDown(0)) {
-                Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-                Plane groundPlane = new Plane(Vector3.up, 0f);
-                if (groundPlane.Raycast(mouseRay, out float distance)) {
-                    Vector3 clickPos = mouseRay.origin + mouseRay.direction * distance;
-                    GameObject unitInstance = Instantiate(unitPrefab, clickPos, Quaternion.identity);
-                    AddUnit(unitInstance.GetComponent<PathingUnit>());
-                }
-            }
-
             List<int> removeList = new List<int>();
             for (int i = m_units.Count - 1; i >= 0; i--) {
                 Unit unit = m_units[i];
