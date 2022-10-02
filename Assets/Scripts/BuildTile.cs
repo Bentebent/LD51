@@ -4,20 +4,17 @@ using UnityEngine;
 
 namespace LD51 {
     public class BuildTile : MonoBehaviour {
-        // Start is called before the first frame update
-        void Start() {
+        public bool Occupied { get; set; } = false;
 
+        private void OnTriggerEnter(Collider other) {
+            if (other.gameObject.TryGetComponent(out Player player)) {
+                player.currentBuildTiles.Add(this);
+            }
         }
 
-        // Update is called once per frame
-        void Update() {
-            if (Input.GetMouseButtonDown(0)) {
-                RaycastHit hit;
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-                if (Physics.Raycast(ray, out hit, Mathf.Infinity, Layers.GetMask(Layers.BuildTile))) {
-                    Debug.Log("COCKS");
-                }
+        private void OnTriggerExit(Collider other) {
+            if (other.gameObject.TryGetComponent(out Player player)) {
+                player.currentBuildTiles.Remove(this);
             }
         }
     }

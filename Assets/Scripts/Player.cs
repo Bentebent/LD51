@@ -46,6 +46,8 @@ namespace LD51 {
         private Vector3 _targetRotationVector = Vector3.zero;
         private Vector3 _currentVelocity = Vector3.zero;
 
+        public HashSet<BuildTile> currentBuildTiles = new HashSet<BuildTile>();
+
         public GameObject selectedTower = null;
         private BaseTower towerInProgress = null;
 
@@ -57,19 +59,43 @@ namespace LD51 {
 
         public List<TowerContainer> towerContainers = new List<TowerContainer>();
 
+        public GameObject placementIndicator;
+
+        BuildTile GetClosestBuildTile() {
+            float closestDist = float.MaxValue;
+            BuildTile closest = null;
+            foreach(var tile in currentBuildTiles) {
+                if (tile.Occupied) {
+                    continue;
+                }
+                float dist = Vector3.Distance(transform.position, tile.transform.position + Vector3.up * 0.6f);
+                if (dist < closestDist) {
+                    closest = tile;
+                    closestDist = dist;
+                }
+            }
+            return closest;
+        }
+
+        BuildTile closestBuildTile = null;
+
         private void Awake() {
             _characterController = GetComponent<CharacterController>();
 
             _beatContainer.SetActive(false);
             _towerButtonsContainer.SetActive(true);
+            placementIndicator.transform.SetParent(null);
         }
 
         // Start is called before the first frame update
         private void Start() {
-
         }
 
         public void StartBuildTower(TowerType type) {
+            if (closestBuildTile == null) {
+                Debug.LogWarning("Cannot build here!");
+                return;
+            }
             foreach (TowerContainer tc in towerContainers) {
                 if (tc.prefab.GetComponent<BaseTower>().type == type) {
                     selectedTower = tc.prefab;
@@ -81,9 +107,16 @@ namespace LD51 {
         // Update is called once per frame
         private void Update() {
 
-           
-
             if (state == PlayerState.Moving) {
+                closestBuildTile = GetClosestBuildTile();
+
+                _towerButtonsContainer.SetActive(closestBuildTile != null);
+                if (closestBuildTile != null) {
+                    placementIndicator.SetActive(true);
+                    placementIndicator.transform.position = closestBuildTile.transform.position + Vector3.up * 0.6f;
+                } else {
+                    placementIndicator.SetActive(false);
+                }
 
                 foreach (TowerContainer tc in towerContainers) {
                     if (Input.GetKeyDown(tc.keyCode)) {
@@ -107,7 +140,7 @@ namespace LD51 {
                 //_beatContainer.transform.position = transform.position + _beatContainerOffset;
                 //_beatContainer.transform.LookAt(Camera.main.transform);
 
-                if (Input.GetKeyDown(KeyCode.Space)) {
+                if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Escape)) {
                     ToggleState();
                 }
             }
@@ -136,7 +169,10 @@ namespace LD51 {
                 _towerButtonsContainer.SetActive(true);
 
                 if (towerInProgress != null && towerInProgress.state == TowerState.Building) {
+                    closestBuildTile.Occupied = false;
                     Destroy(towerInProgress.gameObject);
+                } else {
+                    closestBuildTile = null;
                 }
 
                 towerInProgress = null;
@@ -214,8 +250,13 @@ namespace LD51 {
             //Check if we are overlapping with any existing building
             //Else place down selected building and start dancing
 
+            if (closestBuildTile == null) {
+                return false;
+            }
+
             if (RemoveMoney(prefab.GetComponent<BaseTower>().cost)) {
-                towerInProgress = GameObject.Instantiate(prefab, transform.position, Quaternion.identity).GetComponent<BaseTower>();
+                towerInProgress = GameObject.Instantiate(prefab, closestBuildTile.transform.position + Vector3.up * 0.6f, Quaternion.identity).GetComponent<BaseTower>();
+                closestBuildTile.Occupied = true;
                 return true;
             }
             return false;

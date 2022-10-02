@@ -42,8 +42,8 @@ namespace LD51 {
         private void Awake() {
             buildArea = GetComponent<BoxCollider>();
             areaOfEffect = GetComponent<SphereCollider>();
-            ghost.SetActive(true);
-            visual.SetActive(false);
+            ghost.SetActive(false);
+            visual.SetActive(true);
 
             progressBar = GetComponentInChildren<ProgressBar>();
             progressBar.SetProgress(0f);
@@ -51,8 +51,13 @@ namespace LD51 {
             wrap = transform.Find("wrap");
         }
 
-        private void Start() {
+        public virtual void Start() {
             player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+            AudioMixer.Instance.AddTower(this);
+        }
+
+        public virtual void OnDestroy() {
+            AudioMixer.Instance.RemoveTower(this);
         }
 
         protected virtual void Update() {
@@ -89,8 +94,8 @@ namespace LD51 {
                 state = TowerState.Active;
                 AudioMixer.Instance.AddTower(this);
 
-                ghost.SetActive(false);
-                visual.SetActive(true);
+                //ghost.SetActive(false);
+                //visual.SetActive(true);
 
                 efficiency = efficiency / notesRequiredToBuild;
 

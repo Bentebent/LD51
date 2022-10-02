@@ -38,6 +38,14 @@ namespace LD51 {
             }
         }
 
+        public void RemoveTower(BaseTower tower) {
+            foreach (var track in tracks) {
+                if (tower.type == track.type) {
+                    track.towers.Remove(tower.gameObject);
+                }
+            }
+        }
+
         // Start is called before the first frame update
         void Start() {
             player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
