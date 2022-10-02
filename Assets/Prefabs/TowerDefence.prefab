@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 3971062344017195814}
   m_Layer: 0
   m_Name: TowerDefence
-  m_TagString: Untagged
+  m_TagString: TD
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -93,3 +93,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_unitPrefab: {fileID: 0}
   m_path: {fileID: 6839561127510033824}
+  spawnTimer: 0
+  spawnMin: 0
+  spawnMax: 0
+  waitTime: 0

@@ -56,6 +56,7 @@ namespace LD51 {
         public int hitsInARow = 0;
 
         public int money = 100;
+        public int lives = 100;
 
         public List<TowerContainer> towerContainers = new List<TowerContainer>();
 
@@ -91,6 +92,14 @@ namespace LD51 {
 
         // Start is called before the first frame update
         private void Start() {
+            var tds = GameObject.FindGameObjectsWithTag("TD");
+            foreach (var td in tds) {
+                td.GetComponent<TowerDefence>().RegisterOnUnitEscaped(onEscaped);
+            }
+        }
+
+        private void onEscaped(Path.Unit unit) {
+            lives -= 1;
         }
 
         public void StartBuildTower(TowerType type) {

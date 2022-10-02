@@ -7,6 +7,7 @@ TagManager:
   - BeatBox
   - Note
   - Enemy
+  - TD
   layers:
   - Default
   - TransparentFX

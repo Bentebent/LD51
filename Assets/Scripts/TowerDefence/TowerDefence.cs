@@ -32,6 +32,10 @@ namespace LD51 {
             startTime = Time.time;
         }
 
+        public void RegisterOnUnitEscaped(Path.UnitEscapedDelegate foo) {
+            m_path.UnitEscaped += foo;
+        }
+
         private void OnUnitEscaped(Path.Unit unit) {
             Destroy(unit.pathUnit.gameObject);
             m_units.Remove(unit);
