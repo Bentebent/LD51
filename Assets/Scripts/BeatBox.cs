@@ -29,7 +29,7 @@ namespace LD51 {
                     _noteInside = null;
                 }
                 else {
-                    _owner.AddMiss();
+                    _owner.AddMiss(false);
                 }
             }
             
@@ -42,7 +42,7 @@ namespace LD51 {
 
         private void OnTriggerExit(Collider other) {
             _noteInside = null;
-            _owner.AddMiss();
+            _owner.AddMiss(true);
         }
 
         private void OnTriggerStay(Collider other) {

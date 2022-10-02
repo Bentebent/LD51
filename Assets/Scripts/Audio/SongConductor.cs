@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace LD51 {
     public class SongConductor : MonoBehaviour {
-
+        const float noteTravelDistance = 12f;
         //Song beats per minute
         //This is determined by the song you're trying to sync up to
         public float songBpm;
@@ -123,7 +123,7 @@ namespace LD51 {
                     noteInstance.goalPos = beatBox.transform.position;
                     noteInstance.birthDspTime = (float)AudioSettings.dspTime;
                     noteInstance.goalDspTime = noteInstance.birthDspTime + secPerBeat * beatsShownInAdvance;
-                    noteInstance.transform.position = beatBox.transform.position - beatBox.transform.up * 5;
+                    noteInstance.transform.position = beatBox.transform.position - beatBox.transform.up * noteTravelDistance;
                     noteInstance.transform.rotation = beatBox.transform.rotation;
                     noteInstance.gameObject.SetActive(true);
 

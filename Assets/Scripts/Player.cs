@@ -65,6 +65,9 @@ namespace LD51 {
 
         public int NotesRequiredToBuildCurrentTower { get; set; } = 0;
 
+        private static Player _instance = null;
+        public static Player Instance => _instance;
+
         BuildTile GetClosestBuildTile() {
             float closestDist = float.MaxValue;
             BuildTile closest = null;
@@ -84,6 +87,8 @@ namespace LD51 {
         BuildTile closestBuildTile = null;
 
         private void Awake() {
+            _instance = this;
+
             _characterController = GetComponent<CharacterController>();
 
             _beatContainer.SetActive(false);
@@ -186,7 +191,6 @@ namespace LD51 {
             } else {
                 _beatContainer.SetActive(!_beatContainer.activeInHierarchy);
                 state = PlayerState.Moving;
-                _towerButtonsContainer.SetActive(true);
 
                 if (towerInProgress != null && towerInProgress.state == TowerState.Building) {
                     money += towerInProgress.cost;
@@ -258,11 +262,11 @@ namespace LD51 {
             }
         }
 
-        public void AddMiss() {
+        public void AddMiss(bool snuckPast) {
             hitsInARow = 0;
             currentMultiplier = 1;
 
-            if (towerInProgress.AddBuildProgress(0.1f)) {
+            if (snuckPast && towerInProgress.AddBuildProgress(0.1f)) {
                 ToggleState();
             }
         }
