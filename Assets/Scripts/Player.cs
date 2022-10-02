@@ -177,11 +177,11 @@ namespace LD51 {
         }
 
         public void AddHit(float ínverseDistance) {
-            float tempScore = ínverseDistance * 100 * currentMultiplier;
+            float tempScore = ínverseDistance * currentMultiplier;
             score += tempScore;
             hitsInARow++;
 
-            if(towerInProgress.AddBuildProgress(tempScore)) {
+            if(towerInProgress.AddBuildProgress(Mathf.Clamp01(tempScore))) {
                 ToggleState();
             }
         }
