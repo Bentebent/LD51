@@ -234,14 +234,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildCost: 600
   buildValue: 0
+  cost: 0
   buildProgress: 0
-  notesRequiredToBuild: 50
   state: 0
   type: 0
   buildArea: {fileID: 0}
   areaOfEffect: {fileID: 0}
   visual: {fileID: 8655519016120440996}
   ghost: {fileID: 4022496890756785553}
+--- !u!135 &5120541268568380730
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1679110720307734343}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4022496890756785553 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 348090722322570060, guid: e3a9279b73d6e5a4b86566064cefd463, type: 3}
