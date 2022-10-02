@@ -17,7 +17,7 @@ namespace LD51 {
                 return;
             }
 
-            if (targets.Count > 0 && Time.time - timeSinceLastShot > 2.0f) {
+            if (targets.Count > 0 && Time.time - timeSinceLastShot > 5.0f) {
                 timeSinceLastShot = Time.time;
 
                 KeyValuePair<int, PathingUnit> target = targets.ElementAt(Random.Range(0, targets.Count));

@@ -16,12 +16,12 @@ namespace LD51 {
                 return;
             }
 
-            if (targets.Count > 0 && Time.time - timeSinceLastShot > 0.5f) {
+            if (targets.Count > 0 && Time.time - timeSinceLastShot > 1.0f) {
                 timeSinceLastShot = Time.time;
 
                 KeyValuePair<int, PathingUnit> target = targets.ElementAt(Random.Range(0, targets.Count));
                 if (target.Value != null) {
-                    target.Value.health -= 50;
+                    target.Value.health -= 25;
                     if (target.Value.health <= 0) {
                         player.AddMoney(target.Value.value);
                         targets.Remove(target.Key);

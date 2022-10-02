@@ -100,7 +100,7 @@ MonoBehaviour:
   pathRadius: 5
   health: 100
   speedMultiplier: 1
-  value: 100
+  value: 50
   progressBar: {fileID: 484146811742746630}
 --- !u!135 &2892895848548413249
 SphereCollider:

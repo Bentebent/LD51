@@ -17,7 +17,7 @@ namespace LD51 {
             var colliders = Physics.OverlapSphere(transform.position, 5.0f, Layers.GetMask(Layers.Enemy));
             foreach (var collider in colliders) {
                 var unit = collider.GetComponent<PathingUnit>();
-                unit.health -= 25;
+                unit.health -= 15;
                 if (unit.health <= 0) {
                     player.AddMoney(unit.value);
                     Destroy(unit.gameObject);

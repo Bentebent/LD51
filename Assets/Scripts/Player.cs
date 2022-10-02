@@ -143,12 +143,12 @@ namespace LD51 {
                     placementIndicator.SetActive(false);
                 }
 
-                //foreach (TowerContainer tc in towerContainers) {
-                //    if (Input.GetKeyDown(tc.keyCode)) {
-                //        selectedTower = tc.prefab;
-                //        ToggleState();
-                //    }
-                //}
+                foreach (TowerContainer tc in towerContainers) {
+                    if (Input.GetKeyDown(tc.keyCode)) {
+                        selectedTower = tc.prefab;
+                        ToggleState();
+                    }
+                }
 
                 GatherInput();
                 _movementVector = Vector3.zero;

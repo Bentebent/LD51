@@ -13,7 +13,7 @@ namespace LD51 {
                 return;
 
             foreach (var kvp in targets) {
-                kvp.Value.speedMultiplier = 0.5f;
+                kvp.Value.speedMultiplier = 0.8f;
             }
 
         }
