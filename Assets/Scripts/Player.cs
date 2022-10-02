@@ -33,6 +33,9 @@ namespace LD51 {
         private GameObject _beatContainer = null;
 
         [SerializeField]
+        private GameObject _towerButtonsContainer = null;
+
+        [SerializeField]
         private Vector3 _beatContainerOffset = Vector3.zero;
 
         public PlayerState state = PlayerState.Moving;
@@ -58,11 +61,21 @@ namespace LD51 {
             _characterController = GetComponent<CharacterController>();
 
             _beatContainer.SetActive(false);
+            _towerButtonsContainer.SetActive(true);
         }
 
         // Start is called before the first frame update
         private void Start() {
 
+        }
+
+        public void StartBuildTower(TowerType type) {
+            foreach (TowerContainer tc in towerContainers) {
+                if (tc.prefab.GetComponent<BaseTower>().type == type) {
+                    selectedTower = tc.prefab;
+                    ToggleState();
+                }
+            }
         }
 
         // Update is called once per frame
@@ -108,6 +121,7 @@ namespace LD51 {
 
             if (state == PlayerState.Moving) {
                 if (PlaceBuilding(selectedTower)) {
+                    _towerButtonsContainer.SetActive(false);
                     state = PlayerState.Dancing;
                     _beatContainer.SetActive(!_beatContainer.activeInHierarchy);
                     SongConductor.Instance.GetBeatBoxes();
@@ -119,6 +133,7 @@ namespace LD51 {
             } else {
                 _beatContainer.SetActive(!_beatContainer.activeInHierarchy);
                 state = PlayerState.Moving;
+                _towerButtonsContainer.SetActive(true);
 
                 if (towerInProgress != null && towerInProgress.state == TowerState.Building) {
                     Destroy(towerInProgress.gameObject);
