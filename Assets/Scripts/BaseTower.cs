@@ -23,7 +23,7 @@ namespace LD51 {
         public int cost = 0;
 
         public int buildProgress = 0;
-        private int notesRequiredToBuild = 25;
+        public int NotesRequiredToBuild => 25;
         float efficiency = 0f;
 
         public TowerState state = TowerState.Building;
@@ -42,8 +42,8 @@ namespace LD51 {
         private void Awake() {
             buildArea = GetComponent<BoxCollider>();
             areaOfEffect = GetComponent<SphereCollider>();
-            ghost.SetActive(false);
-            visual.SetActive(true);
+            ghost.SetActive(true);
+            visual.SetActive(false);
 
             progressBar = GetComponentInChildren<ProgressBar>();
             progressBar.SetProgress(0f);
@@ -87,17 +87,17 @@ namespace LD51 {
 
         public bool AddBuildProgress(float score) {
             buildProgress++;
-            progressBar.SetProgress(buildProgress / (float)notesRequiredToBuild);
+            progressBar.SetProgress(buildProgress / (float)NotesRequiredToBuild);
             efficiency += score;
             wrap.localScale = Vector3.Lerp(Vector3.one * 0.5f, Vector3.one, efficiency / buildProgress);
-            if (buildProgress >= notesRequiredToBuild) {
+            if (buildProgress >= NotesRequiredToBuild) {
                 state = TowerState.Active;
                 AudioMixer.Instance.AddTower(this);
 
-                //ghost.SetActive(false);
-                //visual.SetActive(true);
+                ghost.SetActive(false);
+                visual.SetActive(true);
 
-                efficiency = efficiency / notesRequiredToBuild;
+                efficiency = efficiency / NotesRequiredToBuild;
 
                 wrap.localScale = Vector3.Lerp(Vector3.one * 0.5f, Vector3.one, efficiency);
 
