@@ -35,6 +35,7 @@ namespace LD51 {
         protected Dictionary<int, PathingUnit> targets = new Dictionary<int, PathingUnit>();
 
         private ProgressBar progressBar;
+        Transform wrap;
 
         private void Awake() {
             buildArea = GetComponent<BoxCollider>();
@@ -44,6 +45,8 @@ namespace LD51 {
 
             progressBar = GetComponentInChildren<ProgressBar>();
             progressBar.SetProgress(0f);
+
+            wrap = transform.Find("wrap");
         }
 
         protected virtual void Update() {
@@ -75,6 +78,7 @@ namespace LD51 {
             buildProgress++;
             progressBar.SetProgress(buildProgress / (float)notesRequiredToBuild);
             efficiency += score;
+            wrap.localScale = Vector3.Lerp(Vector3.one * 0.5f, Vector3.one, efficiency / buildProgress);
             if (buildProgress >= notesRequiredToBuild) {
                 state = TowerState.Active;
                 AudioMixer.Instance.AddTower(this);
@@ -83,6 +87,8 @@ namespace LD51 {
                 visual.SetActive(true);
 
                 efficiency = efficiency / notesRequiredToBuild;
+
+                wrap.localScale = Vector3.Lerp(Vector3.one * 0.5f, Vector3.one, efficiency);
 
                 progressBar.SetProgress(0f);
 
