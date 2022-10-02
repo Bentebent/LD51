@@ -15,5 +15,9 @@ namespace LD51 {
                 gameObject.SetActive(progress != 0f);
             }
         }
+
+        public void Update() {
+            transform.LookAt(Camera.main.transform);
+        }
     }
 }
