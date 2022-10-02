@@ -5,7 +5,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 8031239295847480471}
+    m_TransformParent: {fileID: 2408296312738004687}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 33f594573eb0a7d46a5f31a1747ea7ad, type: 3}
       propertyPath: m_RootOrder
@@ -25,7 +25,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 33f594573eb0a7d46a5f31a1747ea7ad, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 33f594573eb0a7d46a5f31a1747ea7ad, type: 3}
       propertyPath: m_LocalPosition.y
@@ -41,7 +41,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 33f594573eb0a7d46a5f31a1747ea7ad, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 33f594573eb0a7d46a5f31a1747ea7ad, type: 3}
       propertyPath: m_LocalRotation.y
@@ -136,8 +136,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: SlowTower
       objectReference: {fileID: 0}
+    - target: {fileID: 7661826180004486081, guid: e3a9279b73d6e5a4b86566064cefd463, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3a9279b73d6e5a4b86566064cefd463, type: 3}
+--- !u!4 &2408296312738004687 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7661826180004486081, guid: e3a9279b73d6e5a4b86566064cefd463, type: 3}
+  m_PrefabInstance: {fileID: 5422258005986321678}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8031239295847480468 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2615196631534967194, guid: e3a9279b73d6e5a4b86566064cefd463, type: 3}
@@ -161,8 +170,3 @@ MonoBehaviour:
   type: 3
   buildArea: {fileID: 0}
   areaOfEffect: {fileID: 0}
---- !u!4 &8031239295847480471 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2615196631534967193, guid: e3a9279b73d6e5a4b86566064cefd463, type: 3}
-  m_PrefabInstance: {fileID: 5422258005986321678}
-  m_PrefabAsset: {fileID: 0}

@@ -8,11 +8,6 @@ namespace LD51 {
 
         float timeSinceLastShot = 0.0f;
 
-        // Start is called before the first frame update
-        public override void Start() {
-            base.Start();
-        }
-
         // Update is called once per frame
         protected override void Update() {
             base.Update();

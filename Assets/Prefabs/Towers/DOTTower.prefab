@@ -5,7 +5,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 391558201869720202}
+    m_TransformParent: {fileID: 5435938441304070354}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: d166c1ee117ddbb49be13d387b7fadca, type: 3}
       propertyPath: m_RootOrder
@@ -25,7 +25,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d166c1ee117ddbb49be13d387b7fadca, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d166c1ee117ddbb49be13d387b7fadca, type: 3}
       propertyPath: m_LocalPosition.y
@@ -41,7 +41,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d166c1ee117ddbb49be13d387b7fadca, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d166c1ee117ddbb49be13d387b7fadca, type: 3}
       propertyPath: m_LocalRotation.y
@@ -128,6 +128,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DOTTower
       objectReference: {fileID: 0}
+    - target: {fileID: 7661826180004486081, guid: e3a9279b73d6e5a4b86566064cefd463, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3a9279b73d6e5a4b86566064cefd463, type: 3}
 --- !u!1 &391558201869720201 stripped
@@ -153,8 +157,8 @@ MonoBehaviour:
   type: 2
   buildArea: {fileID: 0}
   areaOfEffect: {fileID: 0}
---- !u!4 &391558201869720202 stripped
+--- !u!4 &5435938441304070354 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 2615196631534967193, guid: e3a9279b73d6e5a4b86566064cefd463, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7661826180004486081, guid: e3a9279b73d6e5a4b86566064cefd463, type: 3}
   m_PrefabInstance: {fileID: 2388055036239627027}
   m_PrefabAsset: {fileID: 0}

@@ -5,7 +5,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1679110720307734340}
+    m_TransformParent: {fileID: 6436254542269654300}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: c9a9ddaac1662294185ba21c429aee1f, type: 3}
       propertyPath: m_RootOrder
@@ -25,7 +25,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c9a9ddaac1662294185ba21c429aee1f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c9a9ddaac1662294185ba21c429aee1f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -41,7 +41,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c9a9ddaac1662294185ba21c429aee1f, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c9a9ddaac1662294185ba21c429aee1f, type: 3}
       propertyPath: m_LocalRotation.y
@@ -136,13 +136,12 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7661826180004486081, guid: e3a9279b73d6e5a4b86566064cefd463, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3a9279b73d6e5a4b86566064cefd463, type: 3}
---- !u!4 &1679110720307734340 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2615196631534967193, guid: e3a9279b73d6e5a4b86566064cefd463, type: 3}
-  m_PrefabInstance: {fileID: 3676746227813105373}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1679110720307734343 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2615196631534967194, guid: e3a9279b73d6e5a4b86566064cefd463, type: 3}
@@ -166,3 +165,8 @@ MonoBehaviour:
   type: 0
   buildArea: {fileID: 0}
   areaOfEffect: {fileID: 0}
+--- !u!4 &6436254542269654300 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7661826180004486081, guid: e3a9279b73d6e5a4b86566064cefd463, type: 3}
+  m_PrefabInstance: {fileID: 3676746227813105373}
+  m_PrefabAsset: {fileID: 0}
