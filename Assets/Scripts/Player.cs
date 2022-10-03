@@ -69,6 +69,7 @@ namespace LD51 {
 
         private static Player _instance = null;
         public static Player Instance => _instance;
+        public bool IBUILTATOWER = false;
 
         BuildTile GetClosestBuildTile() {
             float closestDist = float.MaxValue;

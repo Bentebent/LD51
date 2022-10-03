@@ -115,6 +115,7 @@ namespace LD51 {
                 wrap.localScale = Vector3.Lerp(Vector3.one * 0.5f, Vector3.one, efficiency);
 
                 progressBar.SetProgress(0f);
+                player.IBUILTATOWER = true;
 
                 return true;
             }

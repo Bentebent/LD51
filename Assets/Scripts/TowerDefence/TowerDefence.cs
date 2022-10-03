@@ -24,12 +24,16 @@ namespace LD51 {
 
         private List<Path.Unit> m_units = new List<Path.Unit>();
 
+        private Player player = null;
+
         float startTime = 0.0f;
         float lastSpawn = 0.0f;
         private void Start() {
             m_path.UnitEscaped += OnUnitEscaped;
             lastSpawn = Time.time;
             startTime = Time.time;
+
+            player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         }
 
         public void RegisterOnUnitEscaped(Path.UnitEscapedDelegate foo) {
@@ -42,11 +46,7 @@ namespace LD51 {
         }
 
         private void Update() {
-            if (Input.GetKeyDown(KeyCode.P)) {
-                SpawnWave(Random.Range(5, 10));
-            }
-
-            if (Time.time - lastSpawn - waitTime > spawnTimer) {
+            if (Time.time - lastSpawn - waitTime > spawnTimer && player.IBUILTATOWER) {
                 SpawnWave(Random.Range(spawnMin, spawnMax) * ((Mathf.FloorToInt(Time.timeSinceLevelLoad / 55) * 2 + 1))) ;
                 lastSpawn = Time.time;
             }
