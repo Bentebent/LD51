@@ -41,6 +41,8 @@ namespace LD51 {
 
         public PlayerState state = PlayerState.Moving;
 
+        public Transform visual;
+
         private Vector3 _inputVector = Vector3.zero;
         private Vector3 _lastInputVector = Vector3.zero;
         private Vector3 _movementVector = Vector3.zero;
@@ -251,6 +253,15 @@ namespace LD51 {
 
             //_animator.SetFloat("speed", Mathf.Clamp01(_currentVelocity.magnitude / _maxVelocity));
             _characterController.Move(_currentVelocity * Time.deltaTime + Physics.gravity * Time.deltaTime);
+
+            if (_currentVelocity.magnitude > 0.1f) {
+                float sine = Mathf.Sin(Time.time * 20f);
+                visual.transform.localPosition = Vector3.up * Mathf.Abs(sine) * 0.2f;
+                visual.transform.localEulerAngles = new Vector3(0f, 0f, sine * 15f);
+            } else {
+                visual.transform.localPosition = Vector3.zero;
+                visual.transform.localEulerAngles = Vector3.zero;
+            }
         }
 
         private void UpdateRotation() {

@@ -12,15 +12,28 @@ namespace LD51 {
         public int value = 100;
 
         public ProgressBar progressBar = null;
+        public Transform visual;
 
         private float maxHealth = 0.0f;
 
+        private float randOffs;
         void Start() {
             maxHealth = health;
+            visual = transform.Find("Visual");
+            randOffs = Random.Range(0f, 100f);
         }
 
         private void Update() {
             progressBar.SetProgress(health / maxHealth);
+
+            //if (_currentVelocity.magnitude > 0.1f) {
+            float sine = Mathf.Sin(Time.time * speed * 10f * speedMultiplier + randOffs);
+            visual.transform.localPosition = Vector3.up * Mathf.Abs(sine) * 0.2f;
+            visual.transform.localEulerAngles = new Vector3(0f, 0f, sine * 5f);
+            //} else {
+            //    visual.transform.localPosition = Vector3.zero;
+            //    visual.transform.localEulerAngles = Vector3.zero;
+            //}
         }
     }
 }

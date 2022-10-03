@@ -121,6 +121,7 @@ MonoBehaviour:
   _towerButtonsContainer: {fileID: 0}
   _beatContainerOffset: {x: 0, y: 5, z: 0}
   state: 0
+  visual: {fileID: 2040623407298339052}
   selectedTower: {fileID: 2615196631534967194, guid: e3a9279b73d6e5a4b86566064cefd463, type: 3}
   currentMultiplier: 1
   score: 0

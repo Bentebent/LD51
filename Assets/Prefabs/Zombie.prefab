@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  amount: 0.1
+  amount: 0.2
   beat: 2
 --- !u!1 &3346884828010181064
 GameObject:
@@ -102,6 +102,7 @@ MonoBehaviour:
   speedMultiplier: 1
   value: 50
   progressBar: {fileID: 484146811742746630}
+  visual: {fileID: 0}
 --- !u!135 &2892895848548413249
 SphereCollider:
   m_ObjectHideFlags: 0
