@@ -47,7 +47,7 @@ namespace LD51 {
             }
 
             if (Time.time - lastSpawn - waitTime > spawnTimer) {
-                SpawnWave(Random.Range(spawnMin, spawnMax) * ((Mathf.FloorToInt(Time.timeSinceLevelLoad / 55) + 1))) ;
+                SpawnWave(Random.Range(spawnMin, spawnMax) * ((Mathf.FloorToInt(Time.timeSinceLevelLoad / 55) * 2 + 1))) ;
                 lastSpawn = Time.time;
             }
         }

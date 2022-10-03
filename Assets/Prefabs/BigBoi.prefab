@@ -98,9 +98,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   pathRadius: 10
-  health: 300
+  health: 500
   speedMultiplier: 1
-  value: 500
+  value: 100
   progressBar: {fileID: 1180516500580894783}
   visual: {fileID: 0}
 --- !u!135 &2892895848548413249
