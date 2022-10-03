@@ -5,29 +5,42 @@ using UnityEngine;
 
 namespace LD51 {
     public class SplashTower : BaseTower {
+        int quartedBeatCooldown = 16;
 
         public GameObject explosionPrefab = null;
-        float timeSinceLastShot = 0.0f;
 
-        // Update is called once per frame
-        protected override void Update() {
-            base.Update();
+        public override void Start() {
+            base.Start();
+
+            SongConductor.Instance.Beats += OnBeat;
+        }
+
+        public override void OnDestroy() {
+            base.OnDestroy();
+        }
+
+        private void OnBeat(int quarterBeat) {
 
             if (state == TowerState.Building) {
                 return;
             }
 
-            if (targets.Count > 0 && Time.time - timeSinceLastShot > 5.0f) {
-                timeSinceLastShot = Time.time;
+            if (targets.Count > 0 && quartedBeatCooldown <= 0) {
+                quartedBeatCooldown = 16;
 
-                KeyValuePair<int, PathingUnit> target = targets.ElementAt(Random.Range(0, targets.Count));
-                if (target.Value != null) {
-                    GameObject.Instantiate(explosionPrefab, target.Value.transform.position, Quaternion.identity);
-                } else {
-                    targets.Remove(target.Key);
+                PathingUnit target = targets.OrderBy(_ => Random.Range(0f, 1f)).FirstOrDefault();
+                if (target != null) {
+                    CreateBeamOneShot(target, 0.25f);
+                    Explosion explosion = Instantiate(explosionPrefab, target.transform.position, Quaternion.identity).GetComponent<Explosion>();
+                    explosion.damage = Mathf.Lerp(5f, 15f, efficiency);
                 }
-
             }
+            quartedBeatCooldown = Mathf.Max(0, quartedBeatCooldown - 1);
+        }
+
+        // Update is called once per frame
+        protected override void Update() {
+            base.Update();
         }
     }
 }

@@ -127,6 +127,13 @@ namespace LD51 {
 
         // Update is called once per frame
         private void Update() {
+#if DEBUG
+            if (Input.GetKeyDown(KeyCode.M)) {
+                money += 10000;
+                lives = 100000;
+            }
+#endif
+
             if (state == PlayerState.Dead) {
                 _beatContainer.SetActive(false);
                 return;

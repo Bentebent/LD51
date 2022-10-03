@@ -6,7 +6,35 @@ using UnityEngine;
 namespace LD51 {
     public class SingleTargetTower : BaseTower {
 
-        float timeSinceLastShot = 0.0f;
+        public override void Start() {
+            base.Start();
+
+            SongConductor.Instance.Beats += OnBeat;
+        }
+
+        public override void OnDestroy() {
+            base.OnDestroy();
+
+            SongConductor.Instance.Beats -= OnBeat;
+        }
+
+        private void OnBeat(int quarterBeat) {
+            if (state == TowerState.Building) {
+                return;
+            }
+
+            if (targets.Count > 0 && quarterBeat == beatOffset) {
+                PathingUnit target = targets.OrderBy(_ => Random.Range(0f, 1f)).FirstOrDefault();
+                if (target != null) {
+                    CreateBeamOneShot(target, 0.25f);
+                    target.health -= Mathf.Lerp(10f, 25f, efficiency);
+                    if (target.health <= 0) {
+                        player.AddMoney(target.value);
+                        Destroy(target.gameObject);
+                    }
+                }
+            }
+        }
 
         // Update is called once per frame
         protected override void Update() {
@@ -14,24 +42,6 @@ namespace LD51 {
 
             if (state == TowerState.Building) {
                 return;
-            }
-
-            if (targets.Count > 0 && Time.time - timeSinceLastShot > 1.0f) {
-                timeSinceLastShot = Time.time;
-
-                KeyValuePair<int, PathingUnit> target = targets.ElementAt(Random.Range(0, targets.Count));
-                if (target.Value != null) {
-                    target.Value.health -= 25;
-                    if (target.Value.health <= 0) {
-                        player.AddMoney(target.Value.value);
-                        targets.Remove(target.Key);
-                        Destroy(target.Value.gameObject);
-                    }
-                }
-                else {
-                    targets.Remove(target.Key);
-                }
-                
             }
         }
 

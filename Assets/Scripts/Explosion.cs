@@ -6,6 +6,7 @@ namespace LD51 {
     public class Explosion : MonoBehaviour {
         // Start is called before the first frame update
         Player player = null;
+        public float damage = 15f;
 
         void Start() {
             player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
@@ -17,7 +18,7 @@ namespace LD51 {
             var colliders = Physics.OverlapSphere(transform.position, 5.0f, Layers.GetMask(Layers.Enemy));
             foreach (var collider in colliders) {
                 var unit = collider.GetComponent<PathingUnit>();
-                unit.health -= 15;
+                unit.health -= damage;
                 if (unit.health <= 0) {
                     player.AddMoney(unit.value);
                     Destroy(unit.gameObject);

@@ -7,6 +7,8 @@ namespace LD51 {
         // Start is called before the first frame update
         public float lastTick = 0.0f;
         public float startTime = 0.0f;
+        public float damagePerTick = 5f;
+        public float duration = 3f;
         void Start() {
             startTime = Time.time;
         }
@@ -15,7 +17,7 @@ namespace LD51 {
         void Update() {
             if (Time.time - lastTick > 0.25f) {
                 var unit = gameObject.GetComponent<PathingUnit>();
-                unit.health -= 5;
+                unit.health -= damagePerTick;
 
                 if (unit.health <= 0) {
                     Destroy(unit.gameObject);
@@ -24,7 +26,7 @@ namespace LD51 {
                 lastTick = Time.time;
             }
 
-            if (Time.time - startTime > 3.0f) {
+            if (Time.time - startTime > duration) {
                 Destroy(this);
             }
         }

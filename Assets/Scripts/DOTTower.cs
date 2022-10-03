@@ -5,28 +5,49 @@ using UnityEngine;
 
 namespace LD51 {
     public class DOTTower : BaseTower {
-        float timeSinceLastShot = 0.0f;
+        int quartedBeatCooldown = 16;
 
-        // Update is called once per frame
-        protected override void Update() {
-            base.Update();
+        public override void Start() {
+            base.Start();
+
+            SongConductor.Instance.Beats += OnBeat;
+        }
+
+        public override void OnDestroy() {
+            base.OnDestroy();
+
+            SongConductor.Instance.Beats -= OnBeat;
+        }
+
+        private void OnBeat(int quarterBeat) {
 
             if (state == TowerState.Building) {
                 return;
             }
 
-            if (targets.Count > 0 && Time.time - timeSinceLastShot > 0.5f) {
-                timeSinceLastShot = Time.time;
+            if (targets.Count > 0 && quartedBeatCooldown <= 0) {
+                quartedBeatCooldown = 16;
 
-                KeyValuePair<int, PathingUnit> target = targets.ElementAt(Random.Range(0, targets.Count));
-                if (target.Value != null && target.Value.gameObject.GetComponent<Poison>() == null) {
-                    target.Value.gameObject.AddComponent<Poison>();
-                }
-                else if (target.Value == null) {
-                    targets.Remove(target.Key);
+                // Find a random target without the poison component
+                PathingUnit target = targets
+                    .Where(x => x.TryGetComponent<Poison>(out _) == false)
+                    .OrderBy(_ => Random.Range(0f, 1f))
+                    .FirstOrDefault();
+
+                if (target != null) {
+                    CreateBeamOneShot(target, 0.25f);
+                    Poison poison = target.gameObject.AddComponent<Poison>();
+                    poison.damagePerTick = 5f;
+                    poison.duration = Mathf.Lerp(3f, 6f, efficiency * efficiency);
                 }
 
             }
+            quartedBeatCooldown = Mathf.Max(0, quartedBeatCooldown - 1);
+        }
+
+        // Update is called once per frame
+        protected override void Update() {
+            base.Update();
         }
 
         protected override void OnTriggerEnter(Collider other) {

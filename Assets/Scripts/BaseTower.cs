@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,7 +23,7 @@ namespace LD51 {
 
         public int buildProgress = 0;
         public int NotesRequiredToBuild => 25;
-        float efficiency = 0f;
+        protected float efficiency = 0f;
 
         public TowerState state = TowerState.Building;
         public TowerType type = TowerType.SingleTarget;
@@ -32,8 +31,10 @@ namespace LD51 {
         public SphereCollider areaOfEffect = null;
         public GameObject visual;
         public GameObject ghost;
+        private TowerLineRenderer towerLineTemplate;
 
-        protected Dictionary<int, PathingUnit> targets = new Dictionary<int, PathingUnit>();
+        protected HashSet<PathingUnit> targets = new HashSet<PathingUnit>();
+        protected int beatOffset = 0;
 
         private ProgressBar progressBar;
         protected Player player;
@@ -52,8 +53,11 @@ namespace LD51 {
         }
 
         public virtual void Start() {
+            beatOffset = Random.Range(0, 4);
             player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
             AudioMixer.Instance.AddTower(this);
+            towerLineTemplate = GetComponentInChildren<TowerLineRenderer>();
+            towerLineTemplate.gameObject.SetActive(false);
         }
 
         public virtual void OnDestroy() {
@@ -61,35 +65,43 @@ namespace LD51 {
         }
 
         protected virtual void Update() {
-            List<int> removeIds = new List<int>();
-            foreach(var kvp in targets) {
-                if (kvp.Value == null) {
-                    removeIds.Add(kvp.Key);
-                }
-            }
-
-            removeIds.ForEach(x => targets.Remove(x));
+            targets.RemoveWhere(x => x == null);
         }
 
         protected virtual void OnTriggerEnter(Collider other) {
-            if (other.gameObject.layer == Layers.Enemy) {
-                if (!targets.ContainsKey(other.GetInstanceID())) {
-                    targets.Add(other.GetInstanceID(), other.GetComponent<PathingUnit>());
+            if (other.gameObject.layer == Layers.Enemy && other.TryGetComponent(out PathingUnit pathingUnit)) {
+                if (!targets.Contains(pathingUnit)) {
+                    targets.Add(pathingUnit);
                 }
             }
         }
 
         protected virtual void OnTriggerExit(Collider other) {
-            if (other.gameObject.layer == Layers.Enemy) {
-                targets.Remove(other.GetInstanceID());
+            if (other.gameObject.layer == Layers.Enemy && other.TryGetComponent(out PathingUnit pathingUnit)) {
+                targets.Remove(pathingUnit);
             }
+        }
+
+        protected void CreateBeamOneShot(PathingUnit unit, float duration) {
+            TowerLineRenderer instance = Instantiate(towerLineTemplate);
+            instance.gameObject.SetActive(true);
+            instance.transform.position = towerLineTemplate.transform.position;
+            instance.SetUnitTarget(unit);
+            Destroy(instance.gameObject, duration);
+        }
+
+        private void UpdateEfficiencyScale(int totalNotes) {
+            float efficiencyScale = efficiency / totalNotes;
+            efficiencyScale = Mathf.Clamp01(efficiencyScale * efficiencyScale);
+            wrap.localScale = Vector3.Lerp(Vector3.one * 0.5f, Vector3.one, efficiencyScale);
         }
 
         public bool AddBuildProgress(float score) {
             buildProgress++;
             progressBar.SetProgress(buildProgress / (float)NotesRequiredToBuild);
             efficiency += score;
-            wrap.localScale = Vector3.Lerp(Vector3.one * 0.5f, Vector3.one, efficiency / buildProgress);
+            UpdateEfficiencyScale(buildProgress);
+
             if (buildProgress >= NotesRequiredToBuild) {
                 state = TowerState.Active;
                 AudioMixer.Instance.AddTower(this);
@@ -98,6 +110,7 @@ namespace LD51 {
                 visual.SetActive(true);
 
                 efficiency = efficiency / NotesRequiredToBuild;
+                UpdateEfficiencyScale(NotesRequiredToBuild);
 
                 wrap.localScale = Vector3.Lerp(Vector3.one * 0.5f, Vector3.one, efficiency);
 

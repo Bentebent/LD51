@@ -128,6 +128,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: DOTTower
       objectReference: {fileID: 0}
+    - target: {fileID: 2756699772526311340, guid: e3a9279b73d6e5a4b86566064cefd463, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.b
+      value: 0.04075799
+      objectReference: {fileID: 0}
+    - target: {fileID: 2756699772526311340, guid: e3a9279b73d6e5a4b86566064cefd463, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.g
+      value: 0.5188679
+      objectReference: {fileID: 0}
+    - target: {fileID: 2756699772526311340, guid: e3a9279b73d6e5a4b86566064cefd463, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2756699772526311340, guid: e3a9279b73d6e5a4b86566064cefd463, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.b
+      value: 0.6603774
+      objectReference: {fileID: 0}
+    - target: {fileID: 2756699772526311340, guid: e3a9279b73d6e5a4b86566064cefd463, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.g
+      value: 0.15886435
+      objectReference: {fileID: 0}
+    - target: {fileID: 2756699772526311340, guid: e3a9279b73d6e5a4b86566064cefd463, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.r
+      value: 0.28985164
+      objectReference: {fileID: 0}
     - target: {fileID: 7661826180004486081, guid: e3a9279b73d6e5a4b86566064cefd463, type: 3}
       propertyPath: m_RootOrder
       value: 0
