@@ -418,9 +418,9 @@ RectTransform:
   m_Father: {fileID: 1900358823568960565}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1077.2, y: -52.899994}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 161.5, y: -17.1}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3042040601858257132
@@ -656,6 +656,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8426737578634865232}
+  - component: {fileID: 7075772423430827468}
   m_Layer: 5
   m_Name: HitStatusStart
   m_TagString: Untagged
@@ -683,6 +684,14 @@ RectTransform:
   m_AnchoredPosition: {x: 51, y: -51}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &7075772423430827468
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3702977060837234462}
+  m_CullTransparentMesh: 1
 --- !u!1 &5167217902724204966
 GameObject:
   m_ObjectHideFlags: 0
@@ -1111,6 +1120,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8702937852422751396}
+  - component: {fileID: 7121840656738921155}
   m_Layer: 5
   m_Name: HitStatusMid
   m_TagString: Untagged
@@ -1138,6 +1148,14 @@ RectTransform:
   m_AnchoredPosition: {x: 164.39984, y: -83.80011}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &7121840656738921155
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6732081947008846243}
+  m_CullTransparentMesh: 1
 --- !u!1 &8064395308969702849
 GameObject:
   m_ObjectHideFlags: 0
@@ -1147,6 +1165,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4012215860378285028}
+  - component: {fileID: 7689646575634362102}
   m_Layer: 5
   m_Name: HitStatusEnd
   m_TagString: Untagged
@@ -1174,6 +1193,14 @@ RectTransform:
   m_AnchoredPosition: {x: 215.3999, y: -196.10002}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &7689646575634362102
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8064395308969702849}
+  m_CullTransparentMesh: 1
 --- !u!1 &8249297752640772602
 GameObject:
   m_ObjectHideFlags: 0
