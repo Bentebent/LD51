@@ -30,7 +30,7 @@ namespace LD51 {
 
                 // Find a random target without the poison component
                 PathingUnit target = targets
-                    .Where(x => x.TryGetComponent<Poison>(out _) == false)
+                    .Where(x => x?.TryGetComponent<Poison>(out _) == false)
                     .OrderBy(_ => Random.Range(0f, 1f))
                     .FirstOrDefault();
 

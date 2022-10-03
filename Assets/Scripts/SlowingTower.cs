@@ -23,7 +23,7 @@ namespace LD51 {
 
             foreach (var target in targets) {
                 CreateBeamOneShot(target, 0.25f);
-                target.speedMultiplier = Mathf.Min(target.speedMultiplier, Mathf.Lerp(0.8f, 0.5f, efficiency));
+                target.speedMultiplier = Mathf.Min(target.speedMultiplier, Mathf.Lerp(0.85f, 0.65f, efficiency));
             }
         }
 

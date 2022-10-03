@@ -53,10 +53,30 @@ namespace LD51 {
         }
 
         public void SpawnWave(int numEnemies) {
-            for (int i = 0; i < numEnemies; i++) {
-                Path.Unit unit = m_path.AddUnit(Instantiate(m_unitPrefab));
-                m_units.Add(unit);
+            StartCoroutine(Spawn(numEnemies));
+        }
+        
+        private IEnumerator Spawn(int numEnemies) {
+            int remainingEnemies = numEnemies;
+
+            while(remainingEnemies > 0) {
+                int waveSize = Random.Range(1, Mathf.Min(Mathf.CeilToInt(numEnemies / 5), remainingEnemies));
+
+                for (int i = 0; i < waveSize; i++) {
+                    Path.Unit unit = m_path.AddUnit(Instantiate(m_unitPrefab));
+                    m_units.Add(unit);
+                }
+
+                remainingEnemies -= waveSize;
+
+                if (remainingEnemies <= 0)
+                    break;
+
+                yield return new WaitForSeconds(1.0f);
             }
+
+            yield return null;
+           
         }
     }
 }
