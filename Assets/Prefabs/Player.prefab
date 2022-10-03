@@ -127,7 +127,7 @@ MonoBehaviour:
   score: 0
   hitsInARow: 0
   money: 100
-  lives: 100
+  lives: 50
   towerContainers:
   - keyCode: 49
     prefab: {fileID: 1679110720307734343, guid: 531e94d286a32404aa7c19e0708930c8, type: 3}

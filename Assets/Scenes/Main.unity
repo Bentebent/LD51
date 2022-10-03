@@ -6125,7 +6125,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3971062344017195814, guid: f10acabf18c9d5a4695d780984cd4e27, type: 3}
       propertyPath: waitTime
-      value: 45
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 3971062344017195814, guid: f10acabf18c9d5a4695d780984cd4e27, type: 3}
       propertyPath: spawnTimer
@@ -16335,11 +16335,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3971062344017195814, guid: f10acabf18c9d5a4695d780984cd4e27, type: 3}
       propertyPath: spawnMax
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3971062344017195814, guid: f10acabf18c9d5a4695d780984cd4e27, type: 3}
       propertyPath: spawnMin
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3971062344017195814, guid: f10acabf18c9d5a4695d780984cd4e27, type: 3}
       propertyPath: waitTime
