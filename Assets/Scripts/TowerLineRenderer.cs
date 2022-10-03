@@ -9,6 +9,9 @@ namespace LD51 {
         private PathingUnit unit = null;
 
         public void SetUnitTarget(PathingUnit unit) {
+            if (unit == null) {
+                return;
+            }
             this.unit = unit;
             lineRenderer.SetPosition(0, Vector3.zero);
             lineRenderer.SetPosition(1, unit.transform.position + Vector3.up * 0.5f - transform.position);
