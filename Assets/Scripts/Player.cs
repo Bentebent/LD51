@@ -138,6 +138,11 @@ namespace LD51 {
 
             if (state == PlayerState.Dead) {
                 _beatContainer.SetActive(false);
+
+                if (!UIManager.Instance.endText.activeInHierarchy) {
+                    UIManager.Instance.endText.SetActive(true);
+                }
+
                 return;
             }
 
