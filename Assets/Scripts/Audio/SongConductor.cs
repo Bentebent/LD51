@@ -22,7 +22,7 @@ namespace LD51 {
         public float dspSongTime;
 
         //The offset to the first beat of the song in seconds
-        public float firstBeatOffset;
+        public static float firstBeatOffset;
 
         public int beatsShownInAdvance;
 
@@ -79,6 +79,8 @@ namespace LD51 {
             musicSource.Play();
         }
 
+        int totalBeats = 0;
+
         void Update() {
             //determine how many seconds since the song started
             //songPosition = (float)(AudioSettings.dspTime - dspSongTime - firstBeatOffset);
@@ -95,12 +97,20 @@ namespace LD51 {
                 completedLoops++;
             loopPositionInBeats = songPositionInBeats - completedLoops * beatsPerLoop;
 
+            bool looped = false;
+            if (songPositionInBeats < prevSongPositionInBeats) {
+                looped = true;
+            }
             int quarterBeat = Mathf.FloorToInt(songPositionInBeats * 4);
-            if (Mathf.FloorToInt(prevSongPositionInBeats * 4) < Mathf.FloorToInt(songPositionInBeats * 4)) {
+            if (Mathf.FloorToInt(prevSongPositionInBeats * 4) < Mathf.FloorToInt(songPositionInBeats * 4) || looped) {
                 Beats?.Invoke(quarterBeat%4);
             }
 
-            Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+            GameObject playerGo = GameObject.FindGameObjectWithTag("Player");
+            if (playerGo == null) {
+                return;
+            }
+            Player player = playerGo.GetComponent<Player>();
 
             if (player.state == PlayerState.Dancing) {
 
