@@ -9,13 +9,12 @@ namespace LD51 {
         public BeatVibeCalibrationSquash squash;
         public TMPro.TMP_Text progressText;
 
-        private float averageError = 0f;
         float keyDownTime = 0f;
-
-        int taps = 0;
-        int totalTapsNeeded = 20;
-
         bool keyDownThisFrame = false;
+
+        const int totalTimingsNeeded = 20;
+        int currentTimingIndex = 0;
+        float[] timings = new float[totalTimingsNeeded];
 
         private void Start() {
             SongConductor.Instance.Beats += OnBeat;
@@ -26,29 +25,41 @@ namespace LD51 {
         }
 
         private void Update() {
-            if (Input.anyKeyDown) {
+            progressText.text = $"Taps: {currentTimingIndex}/{totalTimingsNeeded}";
+            if (currentTimingIndex >= totalTimingsNeeded || keyDownThisFrame) {
+                return;
+            }
+
+            if (Input.GetKeyDown(KeyCode.UpArrow) ||
+                Input.GetKeyDown(KeyCode.DownArrow) ||
+                Input.GetKeyDown(KeyCode.LeftArrow) ||
+                Input.GetKeyDown(KeyCode.RightArrow)) {
                 keyDownTime = (float)AudioSettings.dspTime;
                 squash.Squash();
-                taps++;
                 keyDownThisFrame = true;
             }
-            progressText.text = $"Taps: {taps}/{totalTapsNeeded}";
         }
 
         private void OnBeat(int quarterBeat) {
             if (quarterBeat == 0) {
                 if (keyDownThisFrame) {
                     float error = ((float)AudioSettings.dspTime - keyDownTime) % SongConductor.Instance.secPerBeat;
-
-                    averageError = Mathf.Lerp(averageError, error, 0.25f);
-
-                    Debug.Log(averageError);
-
+                    error = Mathf.Min(error, SongConductor.Instance.secPerBeat - error);
+                    Debug.Log(error);
+                    timings[currentTimingIndex] = error;
+                    currentTimingIndex++;
                     keyDownThisFrame = false;
                 }
 
-                if (taps > totalTapsNeeded) {
-                    SongConductor.firstBeatOffset = averageError;
+                if (currentTimingIndex >= totalTimingsNeeded) {
+                    float averageError = 0f;
+                    foreach (var timing in timings) {
+                        averageError += timing;
+                    }
+                    averageError /= totalTimingsNeeded;
+
+                    Debug.Log(averageError);
+                    SongConductor.firstBeatOffset = -averageError;
                     SceneManager.LoadScene(1);
                 }
             }
